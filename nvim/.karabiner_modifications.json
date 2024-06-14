@@ -1,0 +1,189 @@
+{
+  "title": "Select input source by left_control & Mapping caps_lock to left_control",
+  "rules": [
+    {
+      "description": "Switching input source between simplified Chinese and English at tapping the left_control key",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "select_input_source": {
+                "input_source_id": "^com\\.apple\\.inputmethod\\.SCIM\\.ITABC$"
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "input_source_id": "^com\\.apple\\.keylayout\\.ABC$"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "select_input_source": {
+                "input_source_id": "^com\\.apple\\.keylayout\\.ABC$"
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "input_source_id": "^com\\.apple\\.inputmethod\\.SCIM\\.ITABC$"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Switching input source between Squirrel and English at tapping the left_control key",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "select_input_source": {
+                "input_source_id": "^im\\.rime\\.inputmethod\\.Squirrel\\.Hans$"
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "input_source_id": "^com\\.apple\\.keylayout\\.ABC$"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_control",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "select_input_source": {
+                "input_source_id": "^com\\.apple\\.keylayout\\.ABC$"
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "input_source_id": "^im\\.rime\\.inputmethod\\.Squirrel\\.Hans$"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Change caps_lock to left_control if pressed with other keys,change caps_lock to escape if pressed alone",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 250
+          },
+          "to": [
+            {
+              "key_code": "left_control",
+              "lazy": true
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
