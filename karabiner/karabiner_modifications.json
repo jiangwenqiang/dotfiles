@@ -1,5 +1,5 @@
 {
-  "title": "Select input source by left_control & Mapping caps_lock to left_control",
+  "title": "Personal modifications on macOS",
   "rules": [
     {
       "description": "Switching input source between simplified Chinese and English at tapping the left_control key",
@@ -181,6 +181,33 @@
               "key_code": "escape"
             }
           ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Disable command+h & command+m",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ]
+            }
+          },
           "type": "basic"
         }
       ]
