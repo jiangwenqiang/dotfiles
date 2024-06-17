@@ -1,19 +1,33 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Format
+right_format = """$time"""
+
 # Inserts a blank line between shell prompts
 add_newline = false
 
+# makes prompt a single line
+[line_break]
+disabled = true
+
 # Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+# [character] # The name of the module we are configuring is 'character'
+# success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
 
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
 
+# Directory 
 [directory]
 style = "bold cyan"
 truncate_to_repo = false
 truncation_length = 1
 fish_style_pwd_dir_length = 1
+
+# Time
+[time]
+disabled = false
+format = '[󱑎 $time]($style) '
+style = "bright-cyan" 
