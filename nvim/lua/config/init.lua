@@ -11,19 +11,15 @@ function M:get_user_config_path()
   return user_config_file
 end
 
---- Initialize nvim default configuration and variables
+--- Initialize lvim default configuration and variables
 function M:init()
-  -- get vim config from config/default.lua
   lvim = vim.deepcopy(require("config.defaults"))
 
-  -- load default keymappings
   require("keymappings").load_defaults()
 
-  -- get builtins from user_config_file(config.lua)
   local builtins = require("core.builtins")
   builtins.config({ user_config_file = user_config_file })
 
-  -- load vim default setttings
   local settings = require("config.settings")
   settings.load_defaults()
 
@@ -43,6 +39,8 @@ function M:init()
     active = true,
     config = {},
   }
+
+  require("config._deprecated").handle()
 end
 
 --- Override the configuration with a user provided one
@@ -63,13 +61,15 @@ function M:load(config_path)
         )
       end)
       local config_name = vim.loop.os_uname().version:match "Windows" and "config_win" or "config"
-      local example_config = join_paths(get_nvim_base_dir(), "utils", "installer", config_name .. ".example.lua")
+      local example_config = join_paths(get_lvim_base_dir(), "utils", "installer", config_name .. ".example.lua")
       vim.fn.mkdir(user_config_dir, "p")
       vim.loop.fs_copyfile(example_config, config_path)
     end
   end
 
   Log:set_level(lvim.log.level)
+
+  require("config._deprecated").post_load()
 
   autocmds.define_autocmds(lvim.autocommands)
 
@@ -96,8 +96,8 @@ function M:reload()
 
     reload("core.autocmds").configure_format_on_save()
 
-    local plugins = reload "plugins"
-    local plugin_loader = reload "plugin-loader"
+    local plugins = reload("plugins")
+    local plugin_loader = reload("plugin-loader")
 
     plugin_loader.reload { plugins, lvim.plugins }
     reload("core.theme").setup()

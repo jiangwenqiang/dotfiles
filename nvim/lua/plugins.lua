@@ -1,6 +1,6 @@
 -- local require = require("utils.require").require
 local core_plugins = {
-  { "folke/lazy.nvim",              tag = "stable" },
+  { "folke/lazy.nvim", tag = "stable" },
   {
     "neovim/nvim-lspconfig",
     lazy = true,
@@ -21,7 +21,7 @@ local core_plugins = {
     dependencies = "mason.nvim",
   },
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-  { "nvimtools/none-ls.nvim",       lazy = true },
+  { "nvimtools/none-ls.nvim", lazy = true },
   {
     "williamboman/mason.nvim",
     config = function()
@@ -45,7 +45,7 @@ local core_plugins = {
     lazy = lvim.colorscheme ~= "lunar",
   },
   { "Tastyep/structlog.nvim", lazy = true },
-  { "nvim-lua/plenary.nvim",  cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" }, lazy = true },
+  { "nvim-lua/plenary.nvim", cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" }, lazy = true },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -76,10 +76,10 @@ local core_plugins = {
       "cmp-cmdline",
     },
   },
-  { "hrsh7th/cmp-nvim-lsp",                     lazy = true },
-  { "saadparwaiz1/cmp_luasnip",                 lazy = true },
-  { "hrsh7th/cmp-buffer",                       lazy = true },
-  { "hrsh7th/cmp-path",                         lazy = true },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "saadparwaiz1/cmp_luasnip", lazy = true },
+  { "hrsh7th/cmp-buffer", lazy = true },
+  { "hrsh7th/cmp-path", lazy = true },
   {
     "hrsh7th/cmp-cmdline",
     lazy = true,
@@ -102,24 +102,10 @@ local core_plugins = {
         paths = paths,
       }
       require("luasnip.loaders.from_snipmate").lazy_load()
-      -- friendly-snippets - enable standardized comments snippets
-      require("luasnip").filetype_extend("typescript", { "tsdoc" })
-      require("luasnip").filetype_extend("javascript", { "jsdoc" })
-      require("luasnip").filetype_extend("lua", { "luadoc" })
-      require("luasnip").filetype_extend("python", { "pydoc" })
-      require("luasnip").filetype_extend("rust", { "rustdoc" })
-      require("luasnip").filetype_extend("cs", { "csharpdoc" })
-      require("luasnip").filetype_extend("java", { "javadoc" })
-      require("luasnip").filetype_extend("c", { "cdoc" })
-      require("luasnip").filetype_extend("cpp", { "cppdoc" })
-      require("luasnip").filetype_extend("php", { "phpdoc" })
-      require("luasnip").filetype_extend("kotlin", { "kdoc" })
-      require("luasnip").filetype_extend("ruby", { "rdoc" })
-      require("luasnip").filetype_extend("sh", { "shelldoc" })
     end,
-    event = "VimEnter",
+    event = "InsertEnter",
     dependencies = {
-      "rafamadriz/friendly-snippets",
+      "friendly-snippets",
     },
   },
   { "rafamadriz/friendly-snippets", lazy = true, cond = lvim.builtin.luasnip.sources.friendly_snippets },
@@ -127,6 +113,7 @@ local core_plugins = {
     "folke/neodev.nvim",
     lazy = true,
   },
+
   -- Autopairs
   {
     "windwp/nvim-autopairs",
@@ -137,6 +124,7 @@ local core_plugins = {
     enabled = lvim.builtin.autopairs.active,
     dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" },
   },
+
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -163,9 +151,10 @@ local core_plugins = {
     "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = true,
   },
+
   -- NvimTree
   {
-    "kyazdani42/nvim-tree.lua",
+    "nvim-tree/nvim-tree.lua",
     config = function()
       require("core.nvimtree").setup()
     end,
@@ -191,6 +180,7 @@ local core_plugins = {
     cmd = "Gitsigns",
     enabled = lvim.builtin.gitsigns.active,
   },
+
   -- Whichkey
   {
     "folke/which-key.nvim",
@@ -201,6 +191,7 @@ local core_plugins = {
     event = "VeryLazy",
     enabled = lvim.builtin.which_key.active,
   },
+
   -- Comments
   {
     "numToStr/Comment.nvim",
@@ -211,6 +202,7 @@ local core_plugins = {
     event = "User FileOpened",
     enabled = lvim.builtin.comment.active,
   },
+
   -- project.nvim
   {
     "ahmedkhalf/project.nvim",
@@ -221,12 +213,14 @@ local core_plugins = {
     event = "VimEnter",
     cmd = "Telescope projects",
   },
+
   -- Icons
   {
     "nvim-tree/nvim-web-devicons",
     enabled = lvim.use_icons,
     lazy = true,
   },
+
   -- Status Line and Bufferline
   {
     -- "hoob3rt/lualine.nvim",
@@ -238,6 +232,7 @@ local core_plugins = {
     event = "VimEnter",
     enabled = lvim.builtin.lualine.active,
   },
+
   -- breadcrumbs
   {
     "SmiteshP/nvim-navic",
@@ -247,6 +242,7 @@ local core_plugins = {
     event = "User FileOpened",
     enabled = lvim.builtin.breadcrumbs.active,
   },
+
   {
     "akinsho/bufferline.nvim",
     config = function()
@@ -256,6 +252,7 @@ local core_plugins = {
     event = "User FileOpened",
     enabled = lvim.builtin.bufferline.active,
   },
+
   -- Debugging
   {
     "mfussenegger/nvim-dap",
@@ -268,6 +265,7 @@ local core_plugins = {
     },
     enabled = lvim.builtin.dap.active,
   },
+
   -- Debugger user interface
   {
     "rcarriga/nvim-dap-ui",
@@ -277,6 +275,7 @@ local core_plugins = {
     lazy = true,
     enabled = lvim.builtin.dap.active,
   },
+
   -- alpha
   {
     "goolord/alpha-nvim",
@@ -286,6 +285,7 @@ local core_plugins = {
     enabled = lvim.builtin.alpha.active,
     event = "VimEnter",
   },
+
   -- Terminal
   {
     "akinsho/toggleterm.nvim",
@@ -307,11 +307,13 @@ local core_plugins = {
     keys = lvim.builtin.terminal.open_mapping,
     enabled = lvim.builtin.terminal.active,
   },
+
   -- SchemaStore
   {
     "b0o/schemastore.nvim",
     lazy = true,
   },
+
   {
     "RRethy/vim-illuminate",
     config = function()
@@ -320,6 +322,7 @@ local core_plugins = {
     event = "User FileOpened",
     enabled = lvim.builtin.illuminate.active,
   },
+
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
@@ -328,6 +331,7 @@ local core_plugins = {
     event = "User FileOpened",
     enabled = lvim.builtin.indentlines.active,
   },
+
   {
     "lunarvim/onedarker.nvim",
     branch = "freeze",
@@ -341,16 +345,19 @@ local core_plugins = {
     end,
     lazy = lvim.colorscheme ~= "onedarker",
   },
+
   {
     "lunarvim/bigfile.nvim",
     config = function()
       pcall(function()
-        require("bigfile").config(lvim.builtin.bigfile.config)
+        require("bigfile").setup(lvim.builtin.bigfile.config)
       end)
     end,
     enabled = lvim.builtin.bigfile.active,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "FileReadPre", "BufReadPre", "User FileOpened" },
   },
+
   {
     "kevinhwang91/nvim-ufo",
     config = function()
@@ -387,15 +394,14 @@ local core_plugins = {
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
-  }
-  ,
+  },
   {
     "mg979/vim-visual-multi"
   }
   -- the end of plugins
 }
 
-local default_snapshot_path = join_paths(get_nvim_base_dir(), "snapshots", "default.json")
+local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
 local content = vim.fn.readfile(default_snapshot_path)
 local default_sha1 = assert(vim.fn.json_decode(content))
 

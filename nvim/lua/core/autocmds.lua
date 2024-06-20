@@ -105,17 +105,17 @@ function M.load_defaults()
           if lvim.builtin.breadcrumbs.active then
             require("core.breadcrumbs").get_winbar()
           end
-          local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
-          local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
-          local normal_hl = vim.api.nvim_get_hl_by_name("Normal", true)
+          local statusline_hl = vim.api.nvim_get_hl(0, { name = "StatusLine" })
+          local cursorline_hl = vim.api.nvim_get_hl(0, { name = "CursorLine" })
+          local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
           vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
           vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
           vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
           vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
-          vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = statusline_hl.background })
-          vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.background })
-          vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorline_hl.background })
-          vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = statusline_hl.background })
+          vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = statusline_hl.bg })
+          vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.bg })
+          vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.fg, bg = cursorline_hl.bg })
+          vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.fg, bg = statusline_hl.bg })
         end,
       },
     },
@@ -143,7 +143,7 @@ function M.load_defaults()
           local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
           if not (vim.fn.expand "%" == "" or buftype == "nofile") then
             vim.api.nvim_del_augroup_by_name "_file_opened"
-            vim.cmd "do User FileOpened"
+            vim.api.nvim_exec_autocmds("User", { pattern = "FileOpened" })
             require("lsp").setup()
           end
         end,
@@ -215,7 +215,7 @@ function M.enable_reload_config_on_save()
   vim.api.nvim_create_autocmd("BufWritePost", {
     group = "lvim_reload_config_on_save",
     pattern = pattern,
-    desc = "Trigger LvimReload on saving config.lua",
+    desc = "Trigger NeovimReload on saving config.lua",
     callback = function()
       require("config"):reload()
     end,

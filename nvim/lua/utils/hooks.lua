@@ -29,7 +29,7 @@ end
 function M.reset_cache()
   local lvim_modules = {}
   for module, _ in pairs(package.loaded) do
-    if module:match "core" or module:match "lsp" then
+    if module:match "lvim.core" or module:match "lvim.lsp" then
       package.loaded[module] = nil
       table.insert(lvim_modules, module)
     end
@@ -48,7 +48,7 @@ function M.run_post_update()
       vim.log.levels.WARN
     )
     vim.wait(1000)
-    local ret = reload("utils.git").switch_nvim_branch(compat_tag)
+    local ret = reload("utils.git").switch_lvim_branch(compat_tag)
     if ret then
       vim.notify("Reverted to the last known compatible version: " .. compat_tag, vim.log.levels.WARN)
     end
@@ -58,7 +58,7 @@ function M.run_post_update()
   M.reset_cache()
 
   Log:debug "Syncing core plugins"
-  plugin_loader.reload { reload "plugins", lvim.plugins }
+  plugin_loader.reload { reload("plugins"), lvim.plugins }
   plugin_loader.sync_core_plugins()
   M.reset_cache() -- force cache clear and templates regen once more
 

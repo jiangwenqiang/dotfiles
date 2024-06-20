@@ -2,7 +2,7 @@ local M = {}
 
 local Log = require("core.log")
 local utils = require("utils")
-local lvim_lsp_utils = require("lsp.utils")
+local lsp_utils = require("lsp.utils")
 
 local ftplugin_dir = lvim.lsp.templates_dir
 
@@ -12,6 +12,7 @@ function M.remove_template_files()
   -- remove any outdated files
   for _, file in ipairs(vim.fn.glob(ftplugin_dir .. "/*.lua", 1, 1)) do
     vim.fn.delete(file)
+    vim.wait(10)
   end
 end
 
@@ -35,7 +36,7 @@ function M.generate_ftplugin(server_name, dir)
   -- get the supported filetypes and remove any ignored ones
   local filetypes = vim.tbl_filter(function(ft)
     return not vim.tbl_contains(skipped_filetypes, ft)
-  end, lvim_lsp_utils.get_supported_filetypes(server_name) or {})
+  end, lsp_utils.get_supported_filetypes(server_name) or {})
 
   if not filetypes then
     return
@@ -52,10 +53,10 @@ function M.generate_ftplugin(server_name, dir)
 end
 
 ---Generates ftplugin files based on a list of server_names
----The files are generated to a runtimepath: "$LUNARVIM_RUNTIME_DIR/site/after/ftplugin/template.lua"
+---The files are generated to a runtimepath: "$NEOVIM_RUNTIME_DIR/site/after/ftplugin/template.lua"
 ---@param servers_names? table list of servers to be enabled. Will add all by default
 function M.generate_templates(servers_names)
-  servers_names = servers_names or lvim_lsp_utils.get_supported_servers()
+  servers_names = servers_names or lsp_utils.get_supported_servers()
 
   Log:debug "Templates installation in progress"
 

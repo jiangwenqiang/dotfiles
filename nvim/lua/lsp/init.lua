@@ -5,7 +5,7 @@ local autocmds = require("core.autocmds")
 
 local function add_lsp_buffer_options(bufnr)
   for k, v in pairs(lvim.lsp.buffer_options) do
-    vim.api.nvim_buf_set_option(bufnr, k, v)
+    vim.api.nvim_set_option_value(k, v, { buf = bufnr })
   end
 end
 
@@ -89,6 +89,7 @@ end
 function M.setup()
   Log:debug "Setting up LSP support"
 
+  -- load nvim-lspconfig
   local lsp_status_ok, _ = pcall(require, "lspconfig")
   if not lsp_status_ok then
     return
@@ -100,6 +101,7 @@ function M.setup()
     end
   end
 
+  -- generate templates, file path: ~/.local/share/nvim/site/after/ftplugin
   if not utils.is_directory(lvim.lsp.templates_dir) then
     require("lsp.templates").generate_templates()
   end

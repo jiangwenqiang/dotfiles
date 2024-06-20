@@ -1,7 +1,7 @@
 local default_workspace = {
   library = {
     vim.fn.expand "$VIMRUNTIME",
-    get_nvim_base_dir(),
+    get_lvim_base_dir(),
     require("neodev.config").types(),
     "${3rd}/busted/library",
     "${3rd}/luassert/library",

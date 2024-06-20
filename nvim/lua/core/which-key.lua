@@ -6,7 +6,7 @@ M.config = function()
     on_config_done = nil,
     setup = {
       plugins = {
-        marks = false,     -- shows a list of your marks on ' and `
+        marks = false, -- shows a list of your marks on ' and `
         registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
           enabled = true,
@@ -15,13 +15,13 @@ M.config = function()
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
         presets = {
-          operators = false,    -- adds help for operators like d, y, ...
-          motions = false,      -- adds help for motions
+          operators = false, -- adds help for operators like d, y, ...
+          motions = false, -- adds help for motions
           text_objects = false, -- help for text objects triggered after entering an operator
-          windows = false,      -- default bindings on <c-w>
-          nav = false,          -- misc bindings to work with windows
-          z = false,            -- bindings for folds, spelling and others prefixed with z
-          g = false,            -- bindings for prefixed with g
+          windows = false, -- default bindings on <c-w>
+          nav = false, -- misc bindings to work with windows
+          z = false, -- bindings for folds, spelling and others prefixed with z
+          g = false, -- bindings for prefixed with g
         },
       },
       -- add operators that will trigger motion and text object completion
@@ -36,31 +36,31 @@ M.config = function()
       },
       icons = {
         breadcrumb = lvim.icons.ui.DoubleChevronRight, -- symbol used in the command line area that shows your active key combo
-        separator = lvim.icons.ui.BoldArrowRight,      -- symbol used between a key and it's label
-        group = lvim.icons.ui.Plus,                    -- symbol prepended to a group
+        separator = lvim.icons.ui.BoldArrowRight, -- symbol used between a key and it's label
+        group = lvim.icons.ui.Plus, -- symbol prepended to a group
       },
       popup_mappings = {
         scroll_down = "<c-d>", -- binding to scroll down inside the popup
-        scroll_up = "<c-u>",   -- binding to scroll up inside the popup
+        scroll_up = "<c-u>", -- binding to scroll up inside the popup
       },
       window = {
-        border = "single",        -- none, single, double, shadow
-        position = "bottom",      -- bottom, top
-        margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
+        border = "single", -- none, single, double, shadow
+        position = "bottom", -- bottom, top
+        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 0,
       },
       layout = {
-        height = { min = 4, max = 25 },                                             -- min and max height of the columns
-        width = { min = 20, max = 50 },                                             -- min and max width of the columns
-        spacing = 3,                                                                -- spacing between columns
-        align = "left",                                                             -- align columns left, center or right
+        height = { min = 4, max = 25 }, -- min and max height of the columns
+        width = { min = 20, max = 50 }, -- min and max width of the columns
+        spacing = 3, -- spacing between columns
+        align = "left", -- align columns left, center or right
       },
-      ignore_missing = true,                                                        -- enable this to hide mappings for which you didn't specify a label
+      ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
       hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-      show_help = true,                                                             -- show help message on the command line when the popup is visible
-      show_keys = true,                                                             -- show the currently pressed key and its label as a message in the command line
-      triggers = "auto",                                                            -- automatically setup triggers
+      show_help = true, -- show help message on the command line when the popup is visible
+      show_keys = true, -- show the currently pressed key and its label as a message in the command line
+      triggers = "auto", -- automatically setup triggers
       -- triggers = {"<leader>"} -- or specify a list manually
       triggers_blacklist = {
         -- list of mode / prefixes that should never be hooked by WhichKey
@@ -78,20 +78,20 @@ M.config = function()
     },
 
     opts = {
-      mode = "n",     -- NORMAL mode
+      mode = "n", -- NORMAL mode
       prefix = "<leader>",
-      buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true,  -- use `silent` when creating keymaps
+      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true, -- use `silent` when creating keymaps
       noremap = true, -- use `noremap` when creating keymaps
-      nowait = true,  -- use `nowait` when creating keymaps
+      nowait = true, -- use `nowait` when creating keymaps
     },
     vopts = {
-      mode = "v",     -- VISUAL mode
+      mode = "v", -- VISUAL mode
       prefix = "<leader>",
-      buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true,  -- use `silent` when creating keymaps
+      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true, -- use `silent` when creating keymaps
       noremap = true, -- use `noremap` when creating keymaps
-      nowait = true,  -- use `nowait` when creating keymaps
+      nowait = true, -- use `nowait` when creating keymaps
     },
     -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
     -- see https://neovim.io/doc/user/map.html#:map-cmd
@@ -100,6 +100,11 @@ M.config = function()
       l = {
         name = "LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+      },
+      g = {
+        name = "Git",
+        r = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
+        s = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk" },
       },
     },
     mappings = {
@@ -180,10 +185,11 @@ M.config = function()
       -- " Debugging
       g = {
         name = "Git",
-        g = { "<cmd>lua require 'core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
-        j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
-        k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
+        g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
+        j = { "<cmd>lua require 'gitsigns'.nav_hunk('next', {navigation_message = false})<cr>", "Next Hunk" },
+        k = { "<cmd>lua require 'gitsigns'.nav_hunk('prev', {navigation_message = false})<cr>", "Prev Hunk" },
         l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+        L = { "<cmd>lua require 'gitsigns'.blame_line({full=true})<cr>", "Blame Line (full)" },
         p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
         r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
         R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
@@ -230,52 +236,53 @@ M.config = function()
         },
         e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
       },
-      N = {
+      L = {
         name = "+Neovim",
         c = {
           "<cmd>edit " .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
         },
+        d = { "<cmd>NeovimDocs<cr>", "View Neovim's docs" },
         f = {
-          "<cmd>lua require('core.telescope.custom-finders').find_nvim_files()<cr>",
-          "Find Neovim files",
+          "<cmd>lua require('lvim.core.telescope.custom-finders').find_lunarvim_files()<cr>",
+          "Find Neovimfiles",
         },
         g = {
-          "<cmd>lua require('core.telescope.custom-finders').grep_nvim_files()<cr>",
-          "Grep Neovim files",
+          "<cmd>lua require('lvim.core.telescope.custom-finders').grep_lunarvim_files()<cr>",
+          "Grep Neovimfiles",
         },
         k = { "<cmd>Telescope keymaps<cr>", "View Neovim's keymappings" },
-        -- i = {
-        --   "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
-        --   "Toggle Neovim Info",
-        -- },
+        i = {
+          "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>",
+          "Toggle NeovimInfo",
+        },
         I = {
-          "<cmd>lua require('core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
+          "<cmd>lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
           "View Neovim's changelog",
         },
         l = {
           name = "+logs",
           d = {
-            "<cmd>lua require('core.terminal').toggle_log_view(require('core.log').get_path())<cr>",
+            "<cmd>lua require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())<cr>",
             "view default log",
           },
           D = {
-            "<cmd>lua vim.fn.execute('edit ' .. require('core.log').get_path())<cr>",
+            "<cmd>lua vim.fn.execute('edit ' .. require('lvim.core.log').get_path())<cr>",
             "Open the default logfile",
           },
           l = {
-            "<cmd>lua require('core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>",
+            "<cmd>lua require('lvim.core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>",
             "view lsp log",
           },
           L = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
           n = {
-            "<cmd>lua require('core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
+            "<cmd>lua require('lvim.core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
             "view neovim log",
           },
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
         },
         r = { "<cmd>NeovimReload<cr>", "Reload Neovim's configuration" },
-        --u = { "<cmd>NeovimUpdate<cr>", "Update Neovim" },
+        u = { "<cmd>NeovimUpdate<cr>", "Update Neovim" },
       },
       s = {
         name = "Search",

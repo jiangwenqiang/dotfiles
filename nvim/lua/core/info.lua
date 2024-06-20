@@ -126,7 +126,7 @@ local function make_auto_lsp_info(ft)
 end
 
 function M.toggle_popup(ft)
-  local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_clients()
   local client_names = {}
   local bufnr = vim.api.nvim_get_current_buf()
   local ts_active_buffers = vim.tbl_keys(vim.treesitter.highlighter.active)
@@ -190,24 +190,24 @@ function M.toggle_popup(ft)
   end
 
   local function set_syntax_hl()
-    vim.cmd [[highlight LvimInfoIdentifier gui=bold]]
-    vim.cmd [[highlight link LvimInfoHeader Type]]
-    vim.fn.matchadd("LvimInfoHeader", "Buffer info")
-    vim.fn.matchadd("LvimInfoHeader", "Active client(s)")
-    vim.fn.matchadd("LvimInfoHeader", fmt("Overridden %s server(s)", ft))
-    vim.fn.matchadd("LvimInfoHeader", "Formatters info")
-    vim.fn.matchadd("LvimInfoHeader", "Linters info")
-    vim.fn.matchadd("LvimInfoHeader", "Code actions info")
-    vim.fn.matchadd("LvimInfoHeader", "Automatic LSP info")
-    vim.fn.matchadd("LvimInfoIdentifier", " " .. ft .. "$")
+    vim.cmd [[highlight NeovimInfoIdentifier gui=bold]]
+    vim.cmd [[highlight link NeovimInfoHeader Type]]
+    vim.fn.matchadd("NeovimInfoHeader", "Buffer info")
+    vim.fn.matchadd("NeovimInfoHeader", "Active client(s)")
+    vim.fn.matchadd("NeovimInfoHeader", fmt("Overridden %s server(s)", ft))
+    vim.fn.matchadd("NeovimInfoHeader", "Formatters info")
+    vim.fn.matchadd("NeovimInfoHeader", "Linters info")
+    vim.fn.matchadd("NeovimInfoHeader", "Code actions info")
+    vim.fn.matchadd("NeovimInfoHeader", "Automatic LSP info")
+    vim.fn.matchadd("NeovimInfoIdentifier", " " .. ft .. "$")
     vim.fn.matchadd("string", "true")
     vim.fn.matchadd("string", "active")
     vim.fn.matchadd("string", lvim.icons.ui.BoxChecked)
     vim.fn.matchadd("boolean", "inactive")
     vim.fn.matchadd("error", "false")
-    tbl_set_highlight(require("lsp.null-ls.formatters").list_registered(ft), "LvimInfoIdentifier")
-    tbl_set_highlight(require("lsp.null-ls.linters").list_registered(ft), "LvimInfoIdentifier")
-    tbl_set_highlight(require("lsp.null-ls.code_actions").list_registered(ft), "LvimInfoIdentifier")
+    tbl_set_highlight(require("lsp.null-ls.formatters").list_registered(ft), "NeovimInfoIdentifier")
+    tbl_set_highlight(require("lsp.null-ls.linters").list_registered(ft), "NeovimInfoIdentifier")
+    tbl_set_highlight(require("lsp.null-ls.code_actions").list_registered(ft), "NeovimInfoIdentifier")
   end
 
   local Popup = require("interface.popup"):new {

@@ -11,7 +11,7 @@ local function git_cmd(opts)
   end
 
   opts = opts or {}
-  opts.cwd = opts.cwd or get_nvim_base_dir()
+  opts.cwd = opts.cwd or get_lvim_base_dir()
 
   local stderr = {}
   local stdout, ret = Job:new({
@@ -44,13 +44,13 @@ local function safe_deep_fetch()
   local fetch_mode = result[1] == "true" and "--unshallow" or "--all"
   ret = git_cmd { args = { "fetch", fetch_mode } }
   if ret ~= 0 then
-    Log:error(fmt "Git fetch %s failed! Please pull the changes manually in %s", fetch_mode, get_nvim_base_dir())
+    Log:error(fmt "Git fetch %s failed! Please pull the changes manually in %s", fetch_mode, get_lvim_base_dir())
     return
   end
   if fetch_mode == "--unshallow" then
     ret = git_cmd { args = { "remote", "set-branches", "origin", "*" } }
     if ret ~= 0 then
-      Log:error(fmt "Git fetch %s failed! Please pull the changes manually in %s", fetch_mode, get_nvim_base_dir())
+      Log:error(fmt "Git fetch %s failed! Please pull the changes manually in %s", fetch_mode, get_lvim_base_dir())
       return
     end
   end
@@ -58,11 +58,11 @@ local function safe_deep_fetch()
 end
 
 ---pulls the latest changes from github
-function M.update_base_nvim()
+function M.update_base_lvim()
   Log:info "Checking for updates"
 
-  if not vim.loop.fs_access(get_nvim_base_dir(), "w") then
-    Log:warn(fmt("Neovim update aborted! cannot write to %s", get_nvim_base_dir()))
+  if not vim.loop.fs_access(get_lvim_base_dir(), "w") then
+    Log:warn(fmt("Lunarvim update aborted! cannot write to %s", get_lvim_base_dir()))
     return
   end
 
@@ -74,13 +74,13 @@ function M.update_base_nvim()
 
   ret = git_cmd { args = { "diff", "--quiet", "@{upstream}" } }
   if ret == 0 then
-    Log:info "Neovim is already up-to-date"
+    Log:info "Neovimis already up-to-date"
     return
   end
 
   ret = git_cmd { args = { "merge", "--ff-only", "--progress" } }
   if ret ~= 0 then
-    Log:error("Update failed! Please pull the changes manually in " .. get_nvim_base_dir())
+    Log:error("Update failed! Please pull the changes manually in " .. get_lvim_base_dir())
     return
   end
 
@@ -89,7 +89,7 @@ end
 
 ---Switch Lunarvim to the specified development branch
 ---@param branch string
-function M.switch_nvim_branch(branch)
+function M.switch_lvim_branch(branch)
   if not safe_deep_fetch() then
     return
   end

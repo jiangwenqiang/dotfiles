@@ -3,7 +3,7 @@ local uv = vim.loop
 
 -- recursive Print (structure, limit, separator)
 local function r_inspect_settings(structure, limit, separator)
-  limit = limit or 100         -- default item limit
+  limit = limit or 100 -- default item limit
   separator = separator or "." -- indent string
   if limit < 1 then
     print "ERROR: Item limit reached."

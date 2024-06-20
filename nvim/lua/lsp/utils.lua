@@ -4,7 +4,7 @@ local tbl = require("utils.table")
 local Log = require("core.log")
 
 function M.is_client_active(name)
-  local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_clients()
   return tbl.find_first(clients, function(client)
     return client.name == name
   end)
@@ -12,7 +12,7 @@ end
 
 function M.get_active_clients_by_ft(filetype)
   local matches = {}
-  local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_clients()
   for _, client in pairs(clients) do
     local supported_filetypes = client.config.filetypes or {}
     if client.name ~= "null-ls" and vim.tbl_contains(supported_filetypes, filetype) then
@@ -55,7 +55,10 @@ end
 ---@param filter { filetype: string | string[] }?: (optional) Used to filter the list of server names.
 ---@return string[] list of names of supported servers
 function M.get_supported_servers(filter)
+  -- force synchronous mode, see: |mason-registry.refresh()|
   require("mason-registry").refresh()
+  require("mason-registry").get_all_packages()
+
   local _, supported_servers = pcall(function()
     return require("mason-lspconfig").get_available_servers(filter)
   end)
@@ -144,7 +147,9 @@ function M.setup_codelens_refresh(client, bufnr)
   vim.api.nvim_create_autocmd(cl_events, {
     group = group,
     buffer = bufnr,
-    callback = vim.lsp.codelens.refresh,
+    callback = function()
+      vim.lsp.codelens.refresh { bufnr = bufnr }
+    end,
   })
 end
 

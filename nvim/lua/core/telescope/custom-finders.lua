@@ -9,29 +9,29 @@ local _, actions = pcall(require, "telescope.actions")
 local _, previewers = pcall(require, "telescope.previewers")
 local _, make_entry = pcall(require, "telescope.make_entry")
 
-function M.find_nvim_files(opts)
+function M.find_lunarvim_files(opts)
   opts = opts or {}
   local theme_opts = themes.get_ivy {
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
     prompt_prefix = ">> ",
-    prompt_title = "~ LunarVim files ~",
+    prompt_title = "~ Neovimfiles ~",
     cwd = get_runtime_dir(),
-    search_dirs = { get_nvim_base_dir(), lvim.lsp.templates_dir },
+    search_dirs = { get_lvim_base_dir(), lvim.lsp.templates_dir },
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   builtin.find_files(opts)
 end
 
-function M.grep_nvim_files(opts)
+function M.grep_lunarvim_files(opts)
   opts = opts or {}
   local theme_opts = themes.get_ivy {
     sorting_strategy = "ascending",
     layout_strategy = "bottom_pane",
     prompt_prefix = ">> ",
-    prompt_title = "~ search LunarVim ~",
+    prompt_title = "~ search Neovim~",
     cwd = get_runtime_dir(),
-    search_dirs = { get_nvim_base_dir(), lvim.lsp.templates_dir },
+    search_dirs = { get_lvim_base_dir(), lvim.lsp.templates_dir },
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   builtin.live_grep(opts)
@@ -49,13 +49,13 @@ end
 
 function M.view_lunarvim_changelog()
   local opts = themes.get_ivy {
-    cwd = get_nvim_base_dir(),
+    cwd = get_lvim_base_dir(),
   }
   opts.entry_maker = make_entry.gen_from_git_commits(opts)
 
   pickers
     .new(opts, {
-      prompt_title = "~ LunarVim Changelog ~",
+      prompt_title = "~ NeovimChangelog ~",
 
       finder = finders.new_oneshot_job(
         vim.tbl_flatten {
