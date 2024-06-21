@@ -110,7 +110,7 @@ return {
       ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Goto references" },
       ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
       ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "show signature help" },
-      ["gl"] = {
+      ["gL"] = {
         function()
           local float = vim.diagnostic.config().float
 
