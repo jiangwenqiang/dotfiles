@@ -4,6 +4,11 @@
 "
 " 所有的插件可以查阅官方插件说明：https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
 
+" macOS 系统下设置长按的模式，允许长按触发持续输入
+" All: defaults write -g ApplePressAndHoldEnabled -bool false
+" Community Edition: defaults write com.jetbrains.intellij.ce ApplePressAndHoldEnabled -bool false
+" Ultimate Edition: defaults write com.jetbrains.intellij ApplePressAndHoldEnabled -bool false
+
 " 中英文输入法自动切换
 set keep-english-in-normal
 
