@@ -7,8 +7,8 @@
 # ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝   ╚═╝      ╚═╝      ╚═╝
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~  GENERAL   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 import = [
-  # "~/.config/alacritty/themes/catppuccin/themescatppuccin-mocha.toml",
-  "~/.config/alacritty/themes/catppuccin/catppuccin-macchiato.toml",
+  "~/.config/alacritty/themes/catppuccin/themescatppuccin-mocha.toml",
+  # "~/.config/alacritty/themes/catppuccin/catppuccin-macchiato.toml",
   # "~/.config/alacritty/themes/catppuccin/catppuccin-frappe.toml",
   # "~/.config/alacritty/themes/catppuccin/catppuccin-latte.toml",
 ]
