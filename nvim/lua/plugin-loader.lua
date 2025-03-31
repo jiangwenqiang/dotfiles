@@ -6,6 +6,7 @@ local join_paths = utils.join_paths
 
 local plugins_dir = join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt")
 
+-- install lazy.nvim if not present
 function plugin_loader.init(opts)
   opts = opts or {}
 

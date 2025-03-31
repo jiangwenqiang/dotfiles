@@ -1,6 +1,6 @@
 -- local require = require("utils.require").require
 local core_plugins = {
-  { "folke/lazy.nvim", tag = "stable" },
+  { "folke/lazy.nvim",              tag = "stable" },
   {
     "neovim/nvim-lspconfig",
     lazy = true,
@@ -21,7 +21,7 @@ local core_plugins = {
     dependencies = "mason.nvim",
   },
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-  { "nvimtools/none-ls.nvim", lazy = true },
+  { "nvimtools/none-ls.nvim",       lazy = true },
   {
     "williamboman/mason.nvim",
     config = function()
@@ -45,7 +45,7 @@ local core_plugins = {
     lazy = lvim.colorscheme ~= "lunar",
   },
   { "Tastyep/structlog.nvim", lazy = true },
-  { "nvim-lua/plenary.nvim", cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" }, lazy = true },
+  { "nvim-lua/plenary.nvim",  cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" }, lazy = true },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -76,10 +76,10 @@ local core_plugins = {
       "cmp-cmdline",
     },
   },
-  { "hrsh7th/cmp-nvim-lsp", lazy = true },
-  { "saadparwaiz1/cmp_luasnip", lazy = true },
-  { "hrsh7th/cmp-buffer", lazy = true },
-  { "hrsh7th/cmp-path", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp",                     lazy = true },
+  { "saadparwaiz1/cmp_luasnip",                 lazy = true },
+  { "hrsh7th/cmp-buffer",                       lazy = true },
+  { "hrsh7th/cmp-path",                         lazy = true },
   {
     "hrsh7th/cmp-cmdline",
     lazy = true,
@@ -128,7 +128,7 @@ local core_plugins = {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    -- run = ":TSUpdate",
+    build = ":TSUpdate",
     config = function()
       local utils = require("utils")
       local path = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "nvim-treesitter")
@@ -397,6 +397,19 @@ local core_plugins = {
   },
   {
     "mg979/vim-visual-multi"
+  },
+  {
+    "mistweaverco/kulala.nvim",
+    keys = {
+      { "<leader>Rs", desc = "Send request" },
+      { "<leader>Ra", desc = "Send all requests" },
+      { "<leader>Rb", desc = "Open scratchpad" },
+    },
+    ft = { "http", "rest" },
+    opts = {
+      -- your configuration comes here
+      global_keymaps = true,
+    },
   }
   -- the end of plugins
 }

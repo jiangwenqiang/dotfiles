@@ -87,7 +87,7 @@
     "commit": "2bc725a"
   },
   "nvim-treesitter": {
-    "commit": "30de5e7"
+    "commit": "9df671f"
   },
   "nvim-ts-context-commentstring": {
     "commit": "cb06438"
@@ -114,7 +114,7 @@
     "commit": "9ef21b2"
   },
   "telescope.nvim": {
-    "commit": "d829aa6"
+    "commit": "a4ed825"
   },
   "toggleterm.nvim": {
     "commit": "fee58a0"
@@ -123,7 +123,7 @@
     "commit": "b9b494f"
   },
   "vim-illuminate": {
-    "commit": "5eeb795"
+    "commit": "19cb21f"
   },
   "which-key.nvim": {
     "commit": "4433e5e"

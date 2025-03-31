@@ -1,5 +1,7 @@
 -- user neovim config file
 vim.o.relativenumber = true
+vim.opt.mouse = ""
+vim.opt.winborder = "single"
 
 -- Fix ESC+j\k swap lines
 -- lvim.keys.insert_mode["<A-j>"] = false

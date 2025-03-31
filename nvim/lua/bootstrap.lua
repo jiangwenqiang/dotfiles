@@ -1,7 +1,7 @@
 local M = {}
 
 if vim.fn.has "nvim-0.10" ~= 1 then
-  vim.notify("Please upgrade your Neovim base installation. Lunarvim requires v0.10+", vim.log.levels.WARN)
+  vim.notify("Please upgrade your Neovim base installation. neovim requires v0.10+", vim.log.levels.WARN)
   vim.wait(5000, function()
     ---@diagnostic disable-next-line: redundant-return-value
     return false
@@ -98,7 +98,7 @@ function M:init(base_dir)
     vim.opt.packpath = vim.opt.rtp:get()
   end
 
-  -- init plugins
+  -- init lazy plugin
   require("plugin-loader").init({
     package_root = self.pack_dir,
     install_path = self.lazy_install_dir,

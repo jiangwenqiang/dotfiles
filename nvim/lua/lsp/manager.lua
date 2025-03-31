@@ -91,6 +91,11 @@ end
 ---@param server_name string name of the language server
 ---@param user_config table? when available it will take predence over any default configurations
 function M.setup(server_name, user_config)
+  -- 禁用 lsp
+  if vim.g.vscode then
+    return
+  end
+
   vim.validate { name = { server_name, "string" } }
   user_config = user_config or {}
 
