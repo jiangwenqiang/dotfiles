@@ -325,6 +325,7 @@ local core_plugins = {
 
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     config = function()
       require("core.indentlines").setup()
     end,

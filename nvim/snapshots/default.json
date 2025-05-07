@@ -63,7 +63,7 @@
     "commit": "d92035e"
   },
   "none-ls.nvim": {
-    "commit": "3a48266"
+    "commit": "7c493a2"
   },
   "nvim-autopairs": {
     "commit": "c15de7e"
@@ -84,7 +84,7 @@
     "commit": "8649f69"
   },
   "nvim-tree.lua": {
-    "commit": "2bc725a"
+    "commit": "be5b788"
   },
   "nvim-treesitter": {
     "commit": "9df671f"
