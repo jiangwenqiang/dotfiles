@@ -1,0 +1,241 @@
+[
+  {
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-+": ["zed::IncreaseUiFontSize", { "persist": false }],
+      "cmd-_": ["zed::DecreaseUiFontSize", { "persist": false }],
+      "cmd-)": ["zed::ResetUiFontSize", { "persist": false }]
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-z": "workspace::ToggleZoom"
+    }
+  },
+  {
+    "context": "Dock || Terminal || Editor || ProjectPanel || AssistantPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || Diagnostics",
+    "bindings": {
+      "cmd-d": "pane::SplitRight",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-right": "vim::ResizePaneRight",
+      "ctrl-left": "vim::ResizePaneLeft",
+      "ctrl-down": "vim::ResizePaneDown",
+      "ctrl-up": "vim::ResizePaneUp",
+      "shift-h": "pane::ActivateNextItem",
+      "shift-l": "pane::ActivatePreviousItem",
+      "alt-,": "pane::SwapItemLeft",
+      "alt-.": "pane::SwapItemRight",
+      "alt-p": "pane::TogglePinTab"
+    }
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "q": "git_panel::Close",
+      "cmd-shift-g": "git_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "GitPanel && ChangesList",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-j": "git_panel::FocusEditor"
+    }
+  },
+  {
+    "context": "GitPanel && CommitEditor > Editor",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-k": "git_panel::FocusChanges" // NOTE: this one does work somewhy
+    }
+  },
+  {
+    // put key-bindings here if you want them to work in normal & visual mode & project panel
+    "context": "ProjectPanel || EmptyPane || (Editor && VimControl && !VimWaiting && !menu)",
+    "bindings": {
+      "cmd-shift-s": "workspace::SaveWithoutFormat",
+      "space ,": "tab_switcher::ToggleAll",
+      "space G": "git_panel::ToggleFocus",
+      "cmd-shift-g": "git_panel::ToggleFocus",
+      "cmd-shift-t": "terminal_panel::ToggleFocus",
+      "space g g": ["task::Spawn", { "task_name": "lazygit" }],
+      "space y": ["task::Spawn", { "task_name": "yazi" }],
+      "space s d": "diagnostics::Deploy",
+      "space space": ["task::Spawn", { "task_name": "file finder" }],
+      "space s g": ["task::Spawn", { "task_name": "find in files" }],
+      "space f p": ["projects::OpenRecent", { "create_new_window": false }],
+      "space f P": ["projects::OpenRecent", { "create_new_window": true }],
+      "space u n": "workspace::ClearAllNotifications"
+    }
+  },
+  {
+    // put key-bindings here if you want them to work in normal & visual mode
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space b W": "pane::CloseCleanItems",
+      "space b w": "pane::CloseOtherItems",
+      "space c a": "editor::ToggleCodeActions",
+      "space c f": "editor::Format",
+      "space c r ": "editor::Rename",
+      "space e": "pane::RevealInProjectPanel",
+      "space g b": "git::Blame",
+      "space g B": "editor::OpenPermalinkToLine",
+      "space g Y": "editor::CopyPermalinkToLine",
+      "space g h d": "editor::ExpandAllDiffHunks",
+      "space g h D": "git::Diff",
+      "space g h r": "git::Restore",
+      "space g h R": "git::RestoreFile",
+      "space h": "vim::ToggleMarksView",
+      "space m p": "markdown::OpenPreview",
+      "space m P": "markdown::OpenPreviewToTheSide",
+      "space s r": ["pane::DeploySearch", { "replace_enabled": true }],
+      "space s s": "outline::Toggle",
+      "space s w": ["task::Spawn", { "task_name": "find in files - selected text" }],
+      "space t L": ["task::Rerun", { "reevaluate_context": true }],
+      "space t l": "task::Rerun",
+      "space t n": ["editor::SpawnNearestTask", { "reveal": "no_focus" }],
+      "space t r": "task::Spawn",
+      "space u i": "editor::ToggleInlayHints",
+      "space u w": "editor::ToggleSoftWrap",
+      "space u z": "workspace::ToggleCenteredLayout",
+      "j": ["vim::Down", { "display_lines": true }],
+      "k": ["vim::Up", { "display_lines": true }],
+      "shift-y": ["workspace::SendKeystrokes", "y $"],
+      "ctrl-space": "editor::SelectLargerSyntaxNode",
+      "backspace": "editor::SelectSmallerSyntaxNode",
+      "g y": ["workspace::SendKeystrokes", "\" + y"],
+      "g p": "editor::Paste",
+      "g r": "editor::FindAllReferences",
+      "g f": "editor::OpenExcerpts",
+      "] e": ["editor::GoToDiagnostic", { "severity": "error" }],
+      "[ e": ["editor::GoToPreviousDiagnostic", { "severity": "error" }],
+      "alt-k": "editor::MoveLineUp",
+      "alt-j": "editor::MoveLineDown"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "J": ["workspace::SendKeystrokes", "m z J ` z"],
+      "f": ["vim::PushFindForward", { "before": false, "multiline": true }],
+      "t": ["vim::PushFindForward", { "before": true, "multiline": true }],
+      "shift-f": ["vim::PushFindBackward", { "after": false, "multiline": true }],
+      "shift-t": ["vim::PushFindBackward", { "after": true, "multiline": true }],
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && (vim_operator == none || vim_operator == n) && !VimWaiting",
+    "bindings": {
+      "Q": "pane::CloseActiveItem"
+    }
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "s": "vim::PushSneak",
+      "S": "vim::PushSneakBackward"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
+    "bindings": {
+      "p": ["vim::Paste", { "preserve_clipboard": true }],
+      "shift-s": ["vim::PushAddSurrounds", {}],
+      "shift-p": ["vim::Paste", { "preserve_clipboard": true }]
+    }
+  },
+  {
+    // Vim: File Tree ("ProjectPanel") actions
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "z c": "project_panel::CollapseSelectedEntry",
+      "z o": "project_panel::ExpandSelectedEntry",
+      "shift-o": "project_panel::RevealInFileManager",
+      "r": "project_panel::Rename",
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "d": "project_panel::Trash",
+      "shift-d": ["project_panel::Trash", { "skip_prompt": true }],
+      "a": "project_panel::NewFile",
+      "shift-a": "project_panel::NewDirectory",
+      "shift-y": "workspace::CopyRelativePath",
+      "g y": "workspace::CopyPath",
+      "q": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "Editor && jupyter && !ContextEditor",
+    "bindings": {
+      "ctrl-shift-enter": "repl::Run",
+      "ctrl-cmd-enter": "repl::RunInPlace"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-t": "workspace::NewTerminal",
+      "cmd-n": "workspace::NewCenterTerminal",
+      "alt-right": "pane::ActivateNextItem",
+      "alt-left": "pane::ActivatePreviousItem",
+      "alt-,": "pane::SwapItemLeft",
+      "alt-.": "pane::SwapItemRight",
+      "alt-p": "pane::TogglePinTab",
+      "cmd-shift-g": "git_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "TabSwitcher",
+    "bindings": {
+      "k": "menu::SelectPrevious",
+      "j": "menu::SelectNext",
+      "x": "tab_switcher::CloseSelectedItem"
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "ctrl-w s": "pane::SplitDown",
+      "cmd-shift-d": "pane::SplitDown",
+      "ctrl-w v": "pane::SplitRight",
+      "cmd-d": "pane::SplitRight",
+      "cmd-1": ["pane::ActivateItem", 0],
+      "cmd-2": ["pane::ActivateItem", 1],
+      "cmd-3": ["pane::ActivateItem", 2],
+      "cmd-4": ["pane::ActivateItem", 3],
+      "cmd-5": ["pane::ActivateItem", 4],
+      "cmd-6": ["pane::ActivateItem", 5],
+      "cmd-7": ["pane::ActivateItem", 6],
+      "cmd-8": ["pane::ActivateItem", 7],
+      "cmd-9": ["pane::ActivateItem", 8],
+      "cmd-0": "pane::ActivateLastItem"
+    }
+  },
+  {
+    "context": "vim_operator == d",
+    "bindings": {
+      "o": "editor::ExpandAllDiffHunks",
+      "r": "git::Restore"
+    }
+  },
+  {
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      // mini.ai plugin behavior
+      "Q": "vim::MiniQuotes",
+      "B": "vim::MiniBrackets"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-x": "vim::Exchange"
+    }
+  }
+]
