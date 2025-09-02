@@ -79,7 +79,7 @@
       "space b W": "pane::CloseCleanItems",
       "space b w": "pane::CloseOtherItems",
       "space c a": "editor::ToggleCodeActions",
-      "space c f": "editor::Format",
+      "space l f": "editor::Format",
       "space c r ": "editor::Rename",
       "space e": "pane::RevealInProjectPanel",
       "space g b": "git::Blame",
@@ -94,7 +94,10 @@
       "space m P": "markdown::OpenPreviewToTheSide",
       "space s r": ["pane::DeploySearch", { "replace_enabled": true }],
       "space s s": "outline::Toggle",
-      "space s w": ["task::Spawn", { "task_name": "find in files - selected text" }],
+      "space s w": [
+        "task::Spawn",
+        { "task_name": "find in files - selected text" }
+      ],
       "space t L": ["task::Rerun", { "reevaluate_context": true }],
       "space t l": "task::Rerun",
       "space t n": ["editor::SpawnNearestTask", { "reveal": "no_focus" }],
@@ -123,8 +126,14 @@
       "J": ["workspace::SendKeystrokes", "m z J ` z"],
       "f": ["vim::PushFindForward", { "before": false, "multiline": true }],
       "t": ["vim::PushFindForward", { "before": true, "multiline": true }],
-      "shift-f": ["vim::PushFindBackward", { "after": false, "multiline": true }],
-      "shift-t": ["vim::PushFindBackward", { "after": true, "multiline": true }],
+      "shift-f": [
+        "vim::PushFindBackward",
+        { "after": false, "multiline": true }
+      ],
+      "shift-t": [
+        "vim::PushFindBackward",
+        { "after": true, "multiline": true }
+      ],
       "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
       "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"]
     }
