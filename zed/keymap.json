@@ -25,8 +25,7 @@
       "ctrl-left": "vim::ResizePaneLeft",
       "ctrl-down": "vim::ResizePaneDown",
       "ctrl-up": "vim::ResizePaneUp",
-      "shift-h": "pane::ActivateNextItem",
-      "shift-l": "pane::ActivatePreviousItem",
+
       "alt-,": "pane::SwapItemLeft",
       "alt-.": "pane::SwapItemRight",
       "alt-p": "pane::TogglePinTab"
@@ -105,9 +104,11 @@
       "space u i": "editor::ToggleInlayHints",
       "space u w": "editor::ToggleSoftWrap",
       "space u z": "workspace::ToggleCenteredLayout",
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "shift-y": ["workspace::SendKeystrokes", "y $"],
       "j": ["vim::Down", { "display_lines": true }],
       "k": ["vim::Up", { "display_lines": true }],
-      "shift-y": ["workspace::SendKeystrokes", "y $"],
       "ctrl-space": "editor::SelectLargerSyntaxNode",
       "backspace": "editor::SelectSmallerSyntaxNode",
       "g y": ["workspace::SendKeystrokes", "\" + y"],
