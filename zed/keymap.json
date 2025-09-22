@@ -172,6 +172,7 @@
       "y": "project_panel::Copy",
       "p": "project_panel::Paste",
       "d": "project_panel::Trash",
+      "o": "project_panel::Open",
       "shift-d": ["project_panel::Trash", { "skip_prompt": true }],
       "a": "project_panel::NewFile",
       "shift-a": "project_panel::NewDirectory",
