@@ -25,7 +25,6 @@
       "ctrl-left": "vim::ResizePaneLeft",
       "ctrl-down": "vim::ResizePaneDown",
       "ctrl-up": "vim::ResizePaneUp",
-
       "alt-,": "pane::SwapItemLeft",
       "alt-.": "pane::SwapItemRight",
       "alt-p": "pane::TogglePinTab"
@@ -59,6 +58,7 @@
       "cmd-shift-s": "workspace::SaveWithoutFormat",
       "space ,": "tab_switcher::ToggleAll",
       "space G": "git_panel::ToggleFocus",
+      "space e": "workspace::ToggleLeftDock",
       "cmd-shift-g": "git_panel::ToggleFocus",
       "cmd-shift-t": "terminal_panel::ToggleFocus",
       "space g g": ["task::Spawn", { "task_name": "lazygit" }],
