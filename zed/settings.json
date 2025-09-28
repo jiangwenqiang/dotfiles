@@ -1,0 +1,99 @@
+{
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+
+  "format_on_save": "off",
+  "lsp": {
+    "jdtls": {
+      "settings": {
+        "java": {
+          "errors": {
+            "incompleteClasspath": {
+              "severity": "warning"
+            }
+          },
+          "configuration": {
+            "updateBuildConfiguration": "interactive",
+            "runtimes": [
+              {
+                "name": "JavaSE-1.8",
+                "path": "~/.sdkman/candidates/java/8.0.452-zulu/"
+              },
+              {
+                "name": "JavaSE-17",
+                "path": "~/.sdkman/candidates/java/17.0.15-tem/"
+              },
+              {
+                "name": "JavaSE-21",
+                "path": "~/.sdkman/candidates/java/21.0.7-tem/"
+              }
+            ]
+          },
+          "trace": {
+            "server": "verbose"
+          },
+          "import": {
+            "gradle": {
+              "enabled": true
+            },
+            "maven": {
+              "enabled": true
+            },
+            "exclusions": [
+              "**/node_modules/**",
+              "**/.metadata/**",
+              "**/archetype-resources/**",
+              "**/META-INF/maven/**",
+              "/**/test/**"
+            ]
+          },
+          "jdt": {
+            "ls": {
+              "lombokSupport": {
+                "enabled": true // Set this to true to enable lombok support
+              }
+            }
+          },
+          "referencesCodeLens": {
+            "enabled": false
+          },
+          "signatureHelp": {
+            "enabled": false
+          },
+          "implementationsCodeLens": {
+            "enabled": false
+          },
+          "format": {
+            "enabled": true
+          },
+          "saveActions": {
+            "organizeImports": false
+          },
+          "contentProvider": {
+            "preferred": null
+          },
+          "autobuild": {
+            "enabled": false
+          },
+          "completion": {
+            "favoriteStaticMembers": [
+              "org.junit.Assert.*",
+              "org.junit.Assume.*",
+              "org.junit.jupiter.api.Assertions.*",
+              "org.junit.jupiter.api.Assumptions.*",
+              "org.junit.jupiter.api.DynamicContainer.*",
+              "org.junit.jupiter.api.DynamicTest.*"
+            ],
+            "importOrder": ["java", "javax", "com", "org"]
+          }
+        }
+      }
+    }
+  }
+}
