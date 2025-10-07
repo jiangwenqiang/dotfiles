@@ -1,0 +1,21 @@
+{
+  "JDTLS LSP Config": {
+    "prefix": "jdtls",
+    "body": [
+      "\"lsp\": {",
+      "    \"jdtls\": {",
+      "      \"settings\": {",
+      "        \"java\": {",
+      "          \"configuration\": {",
+      "            \"maven\": {",
+      "              \"userSettings\": \"~/.m2/settings@gitlab.${1:rta-os.com}.xml\"",
+      "            }",
+      "          }",
+      "        }",
+      "      }",
+      "    }",
+      "  }"
+    ],
+    "description": "Insert LSP config for JDTLS with custom Maven settings"
+  }
+}
