@@ -1,0 +1,9 @@
+# --- macOS 系统文件 ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Trashes
+.Spotlight-V100
+.fseventsd
