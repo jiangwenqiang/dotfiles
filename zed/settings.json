@@ -23,15 +23,15 @@
             "runtimes": [
               {
                 "name": "JavaSE-1.8",
-                "path": "~/.sdkman/candidates/java/8.0.452-zulu/"
+                "path": "~/.sdkman/candidates/java/8.0.462-tem/"
               },
               {
                 "name": "JavaSE-17",
-                "path": "~/.sdkman/candidates/java/17.0.15-tem/"
+                "path": "~/.sdkman/candidates/java/17.0.16-tem/"
               },
               {
                 "name": "JavaSE-21",
-                "path": "~/.sdkman/candidates/java/21.0.7-tem/"
+                "path": "~/.sdkman/candidates/java/21.0.8-tem/"
               }
             ]
           },

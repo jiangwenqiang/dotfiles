@@ -7,3 +7,9 @@ Icon?
 .Trashes
 .Spotlight-V100
 .fseventsd
+
+# zed files
+zed/prompts/
+zed/conversations/
+zed/themes/
+
