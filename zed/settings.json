@@ -18,8 +18,8 @@
               "runtimes": [
                 {
                   "name": "JavaSE-1.8",
-                  "path": "/Users/hermes/.sdkman/candidates/java/8.0.462-tem/",
-                  "sources": "/Users/hermes/.sdkman/candidates/java/8.0.462-tem/src.zip"
+                  "path": "/Users/hermes/.sdkman/candidates/java/8.0.452-zulu/",
+                  "sources": "/Users/hermes/.sdkman/candidates/java/8.0.452-zulu/src.zip"
                 },
                 {
                   "name": "JavaSE-17",
