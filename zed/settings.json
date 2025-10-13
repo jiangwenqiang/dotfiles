@@ -7,56 +7,69 @@
     "light": "Ayu Mirage",
     "dark": "One Dark"
   },
-
   "format_on_save": "off",
   "lsp": {
     "jdtls": {
+      "initialization_options": {
+        "settings": {
+          "java": {
+            "configuration": {
+              "updateBuildConfiguration": "interactive",
+              "runtimes": [
+                {
+                  "name": "JavaSE-1.8",
+                  "path": "/Users/hermes/.sdkman/candidates/java/8.0.462-tem/",
+                  "sources": "/Users/hermes/.sdkman/candidates/java/8.0.462-tem/src.zip"
+                },
+                {
+                  "name": "JavaSE-17",
+                  "path": "/Users/hermes/.sdkman/candidates/java/17.0.16-tem/",
+                  "sources": "/Users/hermes/.sdkman/candidates/java/17.0.16-tem/lib/src.zip"
+                },
+                {
+                  "name": "JavaSE-21",
+                  "path": "/Users/hermes/.sdkman/candidates/java/21.0.8-tem/",
+                  "sources": "/Users/hermes/.sdkman/candidates/java/21.0.8-tem/lib/src.zip"
+                }
+              ]
+            },
+            "import": {
+              "gradle": {
+                "enabled": true
+              },
+              "maven": {
+                "enabled": true
+              },
+              "exclusions": [
+                "**/node_modules/**",
+                "**/.metadata/**",
+                "**/archetype-resources/**",
+                "**/META-INF/maven/**",
+                "/**/test/**"
+              ]
+            },
+            "trace": {
+              "server": "verbose"
+            },
+            "maven": {
+              "downloadSources": true,
+              "updateSnapshots": true
+            }
+          }
+        }
+      },
       "settings": {
         "java": {
+          "home": "/Users/hermes/.sdkman/candidates/java/21.0.8-tem/",
           "errors": {
             "incompleteClasspath": {
               "severity": "warning"
             }
           },
-          "configuration": {
-            "updateBuildConfiguration": "interactive",
-            "runtimes": [
-              {
-                "name": "JavaSE-1.8",
-                "path": "~/.sdkman/candidates/java/8.0.462-tem/"
-              },
-              {
-                "name": "JavaSE-17",
-                "path": "~/.sdkman/candidates/java/17.0.16-tem/"
-              },
-              {
-                "name": "JavaSE-21",
-                "path": "~/.sdkman/candidates/java/21.0.8-tem/"
-              }
-            ]
-          },
-          "trace": {
-            "server": "verbose"
-          },
-          "import": {
-            "gradle": {
-              "enabled": true
-            },
-            "maven": {
-              "enabled": true
-            },
-            "exclusions": [
-              "**/node_modules/**",
-              "**/.metadata/**",
-              "**/archetype-resources/**",
-              "**/META-INF/maven/**",
-              "/**/test/**"
-            ]
-          },
           "jdt": {
             "ls": {
               "lombokSupport": {
-                "enabled": true // Set this to true to enable lombok support
+                "enabled": true
               }
             }
           },
