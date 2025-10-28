@@ -52,7 +52,7 @@
               "server": "verbose"
             },
             "maven": {
-              "downloadSources": true,
+              "downloadSources": false,
               "updateSnapshots": true
             }
           }

@@ -55,7 +55,7 @@
     // put key-bindings here if you want them to work in normal & visual mode & project panel
     "context": "ProjectPanel || EmptyPane || (Editor && VimControl && !VimWaiting && !menu)",
     "bindings": {
-      "cmd-shift-s": "workspace::SaveWithoutFormat",
+      "ctrl-s": "workspace::SaveWithoutFormat",
       "space ,": "tab_switcher::ToggleAll",
       "space G": "git_panel::ToggleFocus",
       "space e": "workspace::ToggleLeftDock",
