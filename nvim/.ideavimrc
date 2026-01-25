@@ -17,8 +17,8 @@ set surround
 
 " easymotion，需要安装 easymotion 插件
 " 禁用默认的配置
-set easymotion
-let g:EasyMotion_do_mapping = 0
+" set easymotion
+" let g:EasyMotion_do_mapping = 0
 
 " 仿真NERDTree插件
 " https://github.com/JetBrains/ideavim/wiki/NERDTree-support
@@ -88,6 +88,33 @@ nmap ge <action>(GotoNextError)
 nmap H <Action>(PreviousTab)
 nmap L <Action>(NextTab)
 nmap J <ESC>:action EditorJoinLines<CR>
+
+" Search for string in visible area and jump
+nmap s <Action>(flash.search)
+xmap s <Action>(flash.search)
+" enhance vim f (find for char in characters to the right of the current cursor)
+nmap f <Action>(flash.find)
+xmap f <Action>(flash.find)
+" enhance vim F (find for char in characters to the left of the current cursor)
+nmap F <Action>(flash.find_backward)
+xmap F <Action>(flash.find_backward)
+" enhance vim t (till for char in characters to the right of the current cursor)
+nmap t <Action>(flash.till)
+xmap t <Action>(flash.till)
+" enhance vim T (till for char in characters to the left of the current cursor)
+nmap T <Action>(flash.till_backward)
+xmap T <Action>(flash.till_backward)
+" enhance vim ; (Repeat the last f/F/t/T search)
+nmap ; <Action>(flash.repeat)
+xmap ; <Action>(flash.repeat)
+" enhance vim , (Repeat the last f/F/t/T search backward)
+nmap , <Action>(flash.repeat_backward)
+xmap , <Action>(flash.repeat_backward)
+" syntax node expansion (flash.nvim treesitter equivalent)
+nmap S <Action>(flash.treesitter)
+xmap S <Action>(flash.treesitter)
+" remote operator (after pressing an operator like d, use r to pick target line remotely)
+omap r <Action>(flash.remote)
 
 " 跳转method
 nmap [f <Action>(MethodUp)
@@ -170,7 +197,8 @@ nmap <leader>cg <Action>(Generate)
 nmap <leader>ct <Action>(com.note.chatgpt.OpenCodeAiWindow)
 xmap <leader>ck <Action>(com.note.chatgpt.OpenCodeAiWindowWithText)
 " easymotion plugin
-nmap <leader>e <Plug>(easymotion-s)
+" nmap <leader>e <Plug>(easymotion-s)
+
 " -----------------------------------------------------------"
 " -----------------          Others          ----------------
 " -----------------------------------------------------------
