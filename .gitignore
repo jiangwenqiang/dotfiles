@@ -8,6 +8,10 @@ Icon?
 .Spotlight-V100
 .fseventsd
 
+# zsh
+.zcompdump*
+.zsh_history
+
 # zed files
 zed/prompts/
 zed/conversations/
