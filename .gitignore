@@ -11,9 +11,9 @@ Icon?
 # zsh
 .zcompdump*
 .zsh_history
+.claude-code.zsh
 
 # zed files
 zed/prompts/
 zed/conversations/
 zed/themes/
-

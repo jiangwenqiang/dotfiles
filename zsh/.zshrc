@@ -1,3 +1,6 @@
+# The Homebrew environment must be initialized before zsh starts.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -102,4 +105,4 @@ source $ZDOTDIR/dev.zsh        # 开发工具/语言相关配置（如 pyenv, nv
 # -----------------------------
 # 6. AI
 # -----------------------------
-source $ZDOTDIR/claude-code.zsh # AI
+source $ZDOTDIR/ai.zsh # AI
