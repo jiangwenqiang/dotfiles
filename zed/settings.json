@@ -1,4 +1,9 @@
 {
+  "agent": {
+    "favorite_models": [],
+    "always_allow_tool_actions": true,
+    "model_parameters": []
+  },
   "auto_update": false,
   "vim_mode": true,
   "ui_font_size": 16,
