@@ -105,4 +105,4 @@ source $ZDOTDIR/dev.zsh        # 开发工具/语言相关配置（如 pyenv, nv
 # -----------------------------
 # 6. AI
 # -----------------------------
-source $ZDOTDIR/ai.zsh # AI
+[[ -f "$ZDOTDIR/ai.zsh" ]] && source $ZDOTDIR/ai.zsh # AI
