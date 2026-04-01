@@ -7,3 +7,8 @@ bindkey '^X^E' edit-command-line
 if command -v zoxide >/dev/null 2>&1; then
     eval "$(zoxide init zsh)"
 fi
+
+# Starship
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init zsh)"
+fi
