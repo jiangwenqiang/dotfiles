@@ -6,7 +6,7 @@ command_timeout = 1000
 
 # makes prompt a single line
 [line_break]
-#disabled = true
+disabled = true
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
@@ -18,7 +18,7 @@ error_symbol = "[\\$](red)"
 [package]
 disabled = true
 
-# Directory 
+# Directory
 [directory]
 style = "bold cyan"
 truncate_to_repo = true
@@ -28,5 +28,15 @@ fish_style_pwd_dir_length = 1
 # Time
 [time]
 disabled = false
-format = '[󱑎 $time]($style) '
-style = "bright-cyan" 
+format = "[$time]($style)"
+style = "bright-cyan"
+time_format = "%H:%M:%S"
+
+# Git
+[git_branch]
+format = "[$branch]($style)"
+style = "bold purple"
+
+[git_status]
+format = "([$all_status]($style))"
+style = "red"
