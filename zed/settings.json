@@ -1,4 +1,15 @@
 {
+  "agent_servers": {
+    "amp-acp": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
   "agent": {
     "favorite_models": [],
     "always_allow_tool_actions": true,
@@ -15,6 +26,21 @@
   },
   "format_on_save": "off",
   "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    },
     "jdtls": {
       "initialization_options": {
         "settings": {
@@ -34,8 +60,8 @@
                 },
                 {
                   "name": "JavaSE-21",
-                  "path": "/Users/hermes/.sdkman/candidates/java/21.0.8-tem/",
-                  "sources": "/Users/hermes/.sdkman/candidates/java/21.0.8-tem/lib/src.zip"
+                  "path": "/Users/hermes/.sdkman/candidates/java/21.0.10-tem/",
+                  "sources": "/Users/hermes/.sdkman/candidates/java/21.0.10-tem/lib/src.zip"
                 }
               ]
             },
