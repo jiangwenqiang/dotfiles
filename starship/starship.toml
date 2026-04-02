@@ -1,6 +1,9 @@
-# Format
+# Schema
 "$schema" = 'https://starship.rs/config-schema.json'
-right_format = """$time"""
+
+# Basic
+format = "$directory$git_branch$git_status$character" 
+right_format = "$time"
 add_newline = false
 command_timeout = 1000
 
@@ -11,8 +14,8 @@ disabled = true
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
 format = "$symbol "
-success_symbol = "[\\$](green)"
-error_symbol = "[\\$](red)"
+success_symbol = "[>](green)"
+error_symbol = "[>](red)"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -22,7 +25,7 @@ disabled = true
 [directory]
 style = "bold cyan"
 truncate_to_repo = true
-truncation_length = 3
+truncation_length = 1
 fish_style_pwd_dir_length = 1
 
 # Time
@@ -34,9 +37,9 @@ time_format = "%H:%M:%S"
 
 # Git
 [git_branch]
-format = "[$branch]($style)"
+format = "([\\($branch]($style))"
 style = "bold purple"
 
 [git_status]
-format = "([$all_status]($style))"
+format = "[$all_status[\\)](bold purple)]($style)"
 style = "red"
