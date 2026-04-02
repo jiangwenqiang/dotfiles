@@ -14,6 +14,11 @@ source $ZDOTDIR/base.zsh   # 基本环境变量、PATH、终端设置等
 source $ZDOTDIR/functions.zsh  # 自定义函数、别名
 
 # -----------------------------
+# 2.1. 补全
+# -----------------------------
+source $ZDOTDIR/completions.zsh  # 命令补全定义
+
+# -----------------------------
 # 3. 插件
 # -----------------------------
 source $ZDOTDIR/plugins.zsh    # zsh 插件加载（如 zsh-syntax-highlighting 等）
