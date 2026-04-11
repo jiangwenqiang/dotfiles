@@ -41,5 +41,5 @@ format = "([\\($branch]($style))"
 style = "bold purple"
 
 [git_status]
-format = "[$all_status[\\)](bold purple)]($style)"
+format = "[$all_status[\\) ](bold purple)]($style)"
 style = "red"
