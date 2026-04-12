@@ -14,7 +14,7 @@ disabled = true
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
 format = "$symbol "
-success_symbol = "[>](green)"
+success_symbol = "[>](#00FFCC)"
 error_symbol = "[>](red)"
 
 # Disable the package module, hiding it from the prompt completely
@@ -23,7 +23,7 @@ disabled = true
 
 # Directory
 [directory]
-style = "bold cyan"
+style = "#22D3EE"
 truncate_to_repo = true
 truncation_length = 1
 fish_style_pwd_dir_length = 1
@@ -38,8 +38,8 @@ time_format = "%H:%M:%S"
 # Git
 [git_branch]
 format = "([\\($branch]($style))"
-style = "bold purple"
+style = "purple"
 
 [git_status]
-format = "[$all_status[\\) ](bold purple)]($style)"
+format = "[$all_status[\\) ](purple)]($style)"
 style = "red"
