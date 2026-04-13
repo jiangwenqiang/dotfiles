@@ -116,7 +116,11 @@ function M.setup()
 
   local function set_handler_opts_if_not_set(name, handler, opts)
     if debug.getinfo(vim.lsp.handlers[name], "S").source:find(vim.env.VIMRUNTIME, 1, true) then
-      vim.lsp.handlers[name] = vim.lsp.with(handler, opts)
+      -- vim.lsp.with() is deprecated in Neovim 0.12+
+      -- Use direct wrapper function instead
+      vim.lsp.handlers[name] = function(err, result, ctx, config)
+        return handler(err, result, ctx, vim.tbl_extend("force", config or {}, opts))
+      end
     end
   end
 

@@ -24,3 +24,4 @@ lvim.keys.normal_mode["L"] = "<cmd>BufferLineCycleNext<cr>"
 lvim.builtin.nvimtree.setup.filters.custom = {
   "node_modules", "\\.cache", "\\.git", "\\.venv", "\\.idea", "\\.DS_Store"
 }
+--lvim.log.level = "DEBUG"
