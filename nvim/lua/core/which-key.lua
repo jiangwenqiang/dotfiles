@@ -185,7 +185,7 @@ M.config = function()
       -- " Debugging
       g = {
         name = "Git",
-        g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
+        g = { "<cmd>lua require 'core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
         j = { "<cmd>lua require 'gitsigns'.nav_hunk('next', {navigation_message = false})<cr>", "Next Hunk" },
         k = { "<cmd>lua require 'gitsigns'.nav_hunk('prev', {navigation_message = false})<cr>", "Prev Hunk" },
         l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
@@ -216,7 +216,7 @@ M.config = function()
         d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
         w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
         f = { "<cmd>lua require('lsp.utils').format()<cr>", "Format" },
-        i = { "<cmd>LspInfo<cr>", "Info" },
+        i = { "<cmd>checkhealth vim.lsp<cr>", "Info" },
         I = { "<cmd>Mason<cr>", "Mason Info" },
         j = {
           "<cmd>lua vim.diagnostic.goto_next()<cr>",
@@ -305,7 +305,7 @@ M.config = function()
       },
       T = {
         name = "Treesitter",
-        i = { ":TSConfigInfo<cr>", "Info" },
+        i = { "<cmd>TSLog<cr>", "Info" },
       },
     },
   }

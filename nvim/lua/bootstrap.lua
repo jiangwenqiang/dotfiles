@@ -24,34 +24,35 @@ _G.require_safe = require("utils.modules").require_safe
 _G.reload = require("utils.modules").reload
 
 ---Get the full path to `$NEOVIM_RUNTIME_DIR`
+---~/.local/share/nvim
 ---@return string|nil
 function _G.get_runtime_dir()
-  local lvim_runtime_dir = os.getenv "NEOVIM_RUNTIME_DIR"
-  if not lvim_runtime_dir then
+  local runtime_dir = os.getenv "NEOVIM_RUNTIME_DIR"
+  if not runtime_dir then
     -- when nvim is used directly
     return vim.call("stdpath", "data")
   end
-  return lvim_runtime_dir
+  return runtime_dir
 end
 
 ---Get the full path to `$NEOVIM_CONFIG_DIR`
 ---@return string|nil
 function _G.get_config_dir()
-  local lvim_config_dir = os.getenv "NEOVIM_CONFIG_DIR"
-  if not lvim_config_dir then
+  local config_dir = os.getenv "NEOVIM_CONFIG_DIR"
+  if not config_dir then
     return vim.call("stdpath", "config")
   end
-  return lvim_config_dir
+  return config_dir
 end
 
 ---Get the full path to `$NEOVIM_CACHE_DIR`
 ---@return string|nil
 function _G.get_cache_dir()
-  local lvim_cache_dir = os.getenv "NEOVIM_CACHE_DIR"
-  if not lvim_cache_dir then
+  local cache_dir = os.getenv "NEOVIM_CACHE_DIR"
+  if not cache_dir then
     return vim.call("stdpath", "cache")
   end
-  return lvim_cache_dir
+  return cache_dir
 end
 
 ---Initialize the `&runtimepath` variables and prepare for startup
@@ -75,7 +76,7 @@ function M:init(base_dir)
 
   ---Get the full path to Neovim's base directory
   ---@return string
-  function _G.get_lvim_base_dir()
+  function _G.get_base_dir()
     local _base_dir = base_dir
     if not _base_dir then
       _base_dir = self.config_dir

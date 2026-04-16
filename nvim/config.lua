@@ -22,5 +22,7 @@ lvim.keys.normal_mode["L"] = "<cmd>BufferLineCycleNext<cr>"
 
 -- nvimtree ignore directories
 lvim.builtin.nvimtree.setup.filters.custom = {
-  "node_modules", "\\.cache", "\\.git", "\\.venv", "\\.idea", "\\.DS_Store"
+    "node_modules", "\\.cache", "\\.git", "\\.venv", "\\.idea", "\\.DS_Store"
 }
+--lvim.log.level = "DEBUG"
+lvim.builtin.project.active = false

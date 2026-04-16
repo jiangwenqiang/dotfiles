@@ -102,9 +102,9 @@ function M.setup()
     return
   end
 
-  local ts_status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
+  local ts_status_ok, treesitter_configs = pcall(require, "nvim-treesitter.config")
   if not ts_status_ok then
-    Log:error "Failed to load nvim-treesitter.configs"
+    Log:error "Failed to load nvim-treesitter.config"
     return
   end
 
@@ -127,9 +127,9 @@ function M.setup()
   end
 
   -- handle deprecated API, https://github.com/windwp/nvim-autopairs/pull/324
-  local ts_utils = require("nvim-treesitter.ts_utils")
-  ts_utils.is_in_node_range = vim.treesitter.is_in_node_range
-  ts_utils.get_node_range = vim.treesitter.get_node_range
+  -- local ts_utils = require("nvim-treesitter.ts_utils")
+  -- ts_utils.is_in_node_range = vim.treesitter.is_in_node_range
+  -- ts_utils.get_node_range = vim.treesitter.get_node_range
 end
 
 return M

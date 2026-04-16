@@ -15,7 +15,7 @@ function plugin_loader.init(opts)
 
   if not utils.is_directory(lazy_install_dir) then
     print "Initializing first time setup"
-    local core_plugins_dir = join_paths(get_lvim_base_dir(), "plugins")
+    local core_plugins_dir = join_paths(get_base_dir(), "plugins")
     if utils.is_directory(core_plugins_dir) then
       vim.fn.mkdir(plugins_dir, "p")
       vim.fn.delete(plugins_dir, "rf")
@@ -29,7 +29,7 @@ function plugin_loader.init(opts)
         lazy_install_dir,
       }
 
-      local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")
+      local default_snapshot_path = join_paths(get_base_dir(), "snapshots", "default.json")
       local snapshot = assert(vim.fn.json_decode(vim.fn.readfile(default_snapshot_path)))
       vim.fn.system {
         "git",
