@@ -17,7 +17,7 @@ function M.find_lunarvim_files(opts)
     prompt_prefix = ">> ",
     prompt_title = "~ Neovimfiles ~",
     cwd = get_runtime_dir(),
-    search_dirs = { get_lvim_base_dir(), lvim.lsp.templates_dir },
+    search_dirs = { get_base_dir(), lvim.lsp.templates_dir },
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   builtin.find_files(opts)
@@ -31,7 +31,7 @@ function M.grep_lunarvim_files(opts)
     prompt_prefix = ">> ",
     prompt_title = "~ search Neovim~",
     cwd = get_runtime_dir(),
-    search_dirs = { get_lvim_base_dir(), lvim.lsp.templates_dir },
+    search_dirs = { get_base_dir(), lvim.lsp.templates_dir },
   }
   opts = vim.tbl_deep_extend("force", theme_opts, opts)
   builtin.live_grep(opts)
@@ -49,7 +49,7 @@ end
 
 function M.view_lunarvim_changelog()
   local opts = themes.get_ivy {
-    cwd = get_lvim_base_dir(),
+    cwd = get_base_dir(),
   }
   opts.entry_maker = make_entry.gen_from_git_commits(opts)
 

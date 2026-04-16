@@ -184,7 +184,7 @@ function M.config()
         change_dir = {
           enable = true,
           global = false,
-          restrict_above_cwd = false,
+          restrict_above_cwd = true,
         },
         expand_all = {
           max_folder_discovery = 300,
