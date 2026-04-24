@@ -38,7 +38,7 @@ function worktree() {
     # Check if repo_name is provided
     if [[ -z "$repo_name" ]]; then
         echo "Error: repo_name is required"
-        echo "Usage: worktree_add <repo_name> [branch_name]"
+        echo "Usage: worktree <repo_name> [branch_name]"
         return 1
     fi
 
@@ -81,8 +81,8 @@ function worktree() {
 
     # Create worktree using git worktree add (in current directory)
     local worktree_path="$(pwd)/$repo_name"
-    echo "Running: git -C \"$source_repo\" worktree add \"$worktree_path\" \"$branch_name\""
-    git -C "$source_repo" worktree add "$worktree_path" "$branch_name"
+    echo "Running: git -C \"$source_repo\" worktree add -b \"$worktree_path\" \"$branch_name\""
+    git -C "$source_repo" worktree add -b "$branch_name" "$worktree_path"
 
     if [[ $? -eq 0 ]]; then
         echo "Worktree created: $repo_name (branch: $branch_name)"

@@ -3,6 +3,7 @@
 " -----------------------------------------------------------
 "
 " 所有的插件可以查阅官方插件说明：https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
+set idearefactormode=keep
 
 " macOS 系统下设置长按的模式，允许长按触发持续输入
 " All: defaults write -g ApplePressAndHoldEnabled -bool false
@@ -121,7 +122,8 @@ nmap [f <Action>(MethodUp)
 nmap ]f <Action>(MethodDown)
 
 " 取消高亮
-nmap <ESC> :noh<CR>
+" nnoremap <ESC> :noh<CR>
+
 " 类wildfire
 nmap <Enter> <Action>(EditorSelectWord)
 nmap <BS> <Action>(EditorUnSelectWord)
@@ -142,7 +144,7 @@ nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 
 " 取消高亮
-nmap <C-[> :noh<CR>
+nnoremap <C-[> :noh<CR>
 " 找到上一个或下一个突出高亮
 nmap <C-j> <Action>(GotoNextElementUnderCaretUsage)
 nmap <C-k> <Action>(GotoPrevElementUnderCaretUsage)
