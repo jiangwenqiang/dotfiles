@@ -31,6 +31,8 @@ function set_proxy() {
 #   repo_name: name of the repository in WORKTREE_ROOT_PATH
 #   branch_name: branch to checkout (default: master)
 function worktree() {
+    # 空目录时让 glob 匹配为空而非报错，否则下方向上查找逻辑永远无法执行
+    setopt localoptions nullglob
     local repo_name="$1"
     local branch_name="${2:-master}"
     local config_file=".workspace.config"
@@ -90,4 +92,11 @@ function worktree() {
         echo "Error: failed to create worktree"
         return 1
     fi
+}
+
+# codex - 完全跳过权限（对应 claude 的 --dangerously-skip-permissions）
+function codex() {
+  command codex \
+    --dangerously-bypass-approvals-and-sandbox \
+    "$@"
 }
