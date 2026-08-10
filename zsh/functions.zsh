@@ -33,6 +33,8 @@ function set_proxy() {
 #
 # 自动从当前目录的 worktree 中找到实际仓库位置，无需配置文件
 function worktree() {
+    # 空目录时让 glob 匹配为空而非报错，否则下方向上查找逻辑永远无法执行
+    setopt localoptions nullglob
     local repo_name="$1"
     local branch_name="${2:-master}"
     local current_dir="$(pwd)"
@@ -160,5 +162,12 @@ function worktree() {
 function claude() {
   command claude \
     --dangerously-skip-permissions \
+    "$@"
+}
+
+# codex - 完全跳过权限（对应 claude 的 --dangerously-skip-permissions）
+function codex() {
+  command codex \
+    --dangerously-bypass-approvals-and-sandbox \
     "$@"
 }
