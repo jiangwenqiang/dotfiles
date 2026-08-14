@@ -28,70 +28,141 @@ function set_proxy() {
 
 # Add git worktree from source repositories
 # Usage: worktree <repo_name> [branch_name]
-#   repo_name: name of the repository in WORKTREE_ROOT_PATH
+#   repo_name: name of the repository (e.g., "ware-core")
 #   branch_name: branch to checkout (default: master)
+#
+# 自动从当前目录的 worktree 中找到实际仓库位置，无需配置文件
 function worktree() {
     # 空目录时让 glob 匹配为空而非报错，否则下方向上查找逻辑永远无法执行
     setopt localoptions nullglob
     local repo_name="$1"
     local branch_name="${2:-master}"
-    local config_file=".workspace.config"
+    local current_dir="$(pwd)"
 
-    # Check if repo_name is provided
+    # 参数校验
     if [[ -z "$repo_name" ]]; then
         echo "Error: repo_name is required"
-        echo "Usage: worktree_add <repo_name> [branch_name]"
+        echo "Usage: worktree <repo_name> [branch_name]"
         return 1
     fi
 
-    # Check if .workspace.config exists
-    if [[ ! -f "$config_file" ]]; then
-        echo "Error: $config_file not found in current directory"
+    # 检查当前目录下是否已存在同名目录/文件
+    if [[ -e "$current_dir/$repo_name" ]]; then
+        echo "Error: '$repo_name' 已存在于当前目录"
+        if [[ -d "$current_dir/$repo_name/.git" || -f "$current_dir/$repo_name/.git" ]]; then
+            echo "提示: 这是一个 Git 仓库，如需切换分支请使用: cd $repo_name && git checkout <branch>"
+        else
+            echo "提示: 请先删除或重命名现有文件/目录"
+        fi
         return 1
     fi
 
-    # Parse WORKTREE_ROOT_PATH from config file
-    local WORKTREE_ROOT_PATH
-    WORKTREE_ROOT_PATH=$(grep -E '^WORKTREE_ROOT_PATH\s*=' "$config_file" 2>/dev/null | cut -d'=' -f2- | sed 's/^[[:space:]]*//;s/^["'"'"']//;s/["'"'"']$//')
+    # 从当前目录的任意 worktree 中找到实际仓库根目录
+    local repo_root=""
+    for item in "$current_dir"/*; do
+        if [[ -f "$item/.git" ]]; then
+            # worktree 的 .git 文件内容: gitdir: /path/to/repo/.git/worktrees/<name>
+            local gitdir_content
+            gitdir_content=$(cat "$item/.git" 2>/dev/null | grep "^gitdir:" | cut -d' ' -f2)
+            if [[ -n "$gitdir_content" ]]; then
+                # 从 /path/to/repo/.git/worktrees/<name> 解析出 /path/to/
+                repo_root=$(dirname "$(dirname "$(dirname "$(dirname "$gitdir_content")")")")
+                break
+            fi
+        elif [[ -d "$item/.git" ]]; then
+            # 普通 Git 仓库，使用当前目录的父目录
+            repo_root="$(dirname "$current_dir")"
+            break
+        fi
+    done
 
-    # Check if WORKTREE_ROOT_PATH is set
-    if [[ -z "$WORKTREE_ROOT_PATH" ]]; then
-        echo "Error: WORKTREE_ROOT_PATH not defined in $config_file"
+    # 如果当前目录为空，向上查找包含多个 Git 仓库的目录
+    if [[ -z "$repo_root" ]]; then
+        local search_dir="$current_dir"
+        local max_depth=5
+        for ((i=0; i<max_depth; i++)); do
+            local repo_count=0
+            for item in "$search_dir"/*; do
+                if [[ -d "$item/.git" || -f "$item/.git" ]]; then
+                    ((repo_count++))
+                fi
+            done
+            if [[ $repo_count -ge 2 ]]; then
+                repo_root="$search_dir"
+                break
+            fi
+            search_dir="$(dirname "$search_dir")"
+        done
+    fi
+
+    if [[ -z "$repo_root" ]]; then
+        echo "Error: 无法找到仓库根目录"
+        echo "提示: 请确保当前目录包含 worktree，或位于包含多个 Git 仓库的目录下"
         return 1
     fi
 
-    # Check if WORKTREE_ROOT_PATH directory exists
-    if [[ ! -d "$WORKTREE_ROOT_PATH" ]]; then
-        echo "Error: WORKTREE_ROOT_PATH directory does not exist: $WORKTREE_ROOT_PATH"
-        return 1
-    fi
+    # 查找目标仓库
+    local source_repo="$repo_root/$repo_name"
 
-    # Construct the source repository path
-    local source_repo="$WORKTREE_ROOT_PATH/$repo_name"
-
-    # Check if the source repository exists
+    # 验证目标仓库存在
     if [[ ! -d "$source_repo" ]]; then
-        echo "Error: repository not found: $source_repo"
+        echo "Error: 仓库 '$repo_name' 不存在于 $repo_root"
+        echo "可用的仓库:"
+        for item in "$repo_root"/*; do
+            if [[ -d "$item/.git" || -f "$item/.git" ]]; then
+                echo "  - $(basename "$item")"
+            fi
+        done
         return 1
     fi
 
-    # Check if it's a valid git repository
-    if [[ ! -d "$source_repo/.git" ]]; then
-        echo "Error: not a valid git repository: $source_repo"
+    # 验证是否为 Git 仓库
+    if [[ ! -d "$source_repo/.git" && ! -f "$source_repo/.git" ]]; then
+        echo "Error: '$source_repo' 不是有效的 Git 仓库"
         return 1
     fi
 
-    # Create worktree using git worktree add (in current directory)
-    local worktree_path="$(pwd)/$repo_name"
-    echo "Running: git -C \"$source_repo\" worktree add \"$worktree_path\" \"$branch_name\""
-    git -C "$source_repo" worktree add "$worktree_path" "$branch_name"
+    # 分支冲突检测
+    local existing_worktree
+    existing_worktree=$(git -C "$source_repo" worktree list 2>/dev/null | grep "\[$branch_name\]" | awk '{print $1}')
+    if [[ -n "$existing_worktree" ]]; then
+        echo "Error: 分支 '$branch_name' 已在以下 worktree 中检出:"
+        echo "  $existing_worktree"
+        echo ""
+        echo "解决方案:"
+        echo "  1. 使用其他分支: worktree $repo_name <other-branch>"
+        echo "  2. 先删除现有 worktree: git worktree remove <path>"
+        return 1
+    fi
+
+    # 创建 worktree
+    local worktree_path="$current_dir/$repo_name"
+    echo "创建 worktree..."
+    echo "  仓库: $source_repo"
+    echo "  分支: $branch_name"
+    echo "  目标: $worktree_path"
+    echo ""
+
+    git -C "$source_repo" worktree add -b "$branch_name" "$worktree_path"
 
     if [[ $? -eq 0 ]]; then
-        echo "Worktree created: $repo_name (branch: $branch_name)"
+        echo "✅ Worktree 创建成功"
+        echo "   位置: $worktree_path"
+        echo "   分支: $branch_name"
+        echo ""
+        echo "当前 worktree 列表:"
+        git -C "$source_repo" worktree list
     else
-        echo "Error: failed to create worktree"
+        echo "❌ Worktree 创建失败"
         return 1
     fi
+}
+
+# claude code
+function claude() {
+  command claude \
+    --dangerously-skip-permissions \
+    "$@"
 }
 
 # codex - 完全跳过权限（对应 claude 的 --dangerously-skip-permissions）
