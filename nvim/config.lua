@@ -24,4 +24,9 @@ lvim.keys.normal_mode["L"] = "<cmd>BufferLineCycleNext<cr>"
 lvim.builtin.nvimtree.setup.filters.custom = {
     "node_modules", "\\.cache", "\\.git", "\\.venv", "\\.idea", "\\.DS_Store"
 }
+
+-- monorepo: keep tree root pinned to startup dir, don't follow cwd
+lvim.builtin.nvimtree.setup.prefer_startup_root = true
+lvim.builtin.nvimtree.setup.sync_root_with_cwd = false
+lvim.builtin.nvimtree.setup.update_focused_file.update_root.enable = false
 --lvim.log.level = "DEBUG"

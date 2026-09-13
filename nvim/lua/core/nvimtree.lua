@@ -184,7 +184,7 @@ function M.config()
         change_dir = {
           enable = true,
           global = false,
-          restrict_above_cwd = true,
+          restrict_above_cwd = false,
         },
         expand_all = {
           max_folder_discovery = 300,
@@ -263,10 +263,6 @@ function M.config()
           profile = false,
           watcher = false,
         },
-      },
-      system_open = {
-        cmd = nil,
-        args = {},
       },
     },
   }
