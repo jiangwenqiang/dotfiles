@@ -33,7 +33,7 @@ set surround
 set ReplaceWithRegister
 nnoremap rs  <Plug>ReplaceWithRegisterOperator
 nnoremap rss <Plug>ReplaceWithRegisterLine
-xmap rs  <Plug>ReplaceWithRegisterVisual
+xnoremap rs  <Plug>ReplaceWithRegisterVisual
 
 " 高亮搜索
 set hlsearch
