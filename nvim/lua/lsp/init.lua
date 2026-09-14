@@ -1,6 +1,5 @@
 local M = {}
 local Log = require("core.log")
-local utils = require("utils")
 local autocmds = require("core.autocmds")
 
 local function add_lsp_buffer_options(bufnr)
@@ -101,10 +100,9 @@ function M.setup()
     end
   end
 
-  -- generate templates, file path: ~/.local/share/nvim/site/after/ftplugin
-  if not utils.is_directory(lvim.lsp.templates_dir) then
-    require("lsp.templates").generate_templates()
-  end
+  -- Enable the servers the user has left in place, and queue the rest for installation
+  -- the first time a file of one of their filetypes is opened.
+  require("lsp.manager").setup()
 
   pcall(function()
     require("nlspsettings").setup(lvim.lsp.nlsp_settings.setup)

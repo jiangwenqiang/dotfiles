@@ -1,68 +1,69 @@
-# Personal Config
+# dotfiles
 
-## alacritty
-...
+My macOS setup, tracked in git: terminal, shell, editor, multiplexer, prompt, keyboard and
+fonts. Everything is deployed by symlink, so a file in this repository *is* the live
+configuration — there is no build step and no copy.
 
-## neovim
-Lean mean Neovim machine, 30-45ms startup time. Works best with [Neovim] = 0.9.5
+It is single-machine and deliberately not portable. `/Users/hermes` is hardcoded in
+`zed/settings.json` (Java runtimes), `zsh/dev.zsh` (`PNPM_HOME`) and a comment in
+`alacritty/alacritty.toml`.
 
-> I encourage you to fork this repo and create your own experience.
-> Learn how to tweak and change Neovim to the way YOU like it.
-> This is my cultivation of years of tweaking, use it as a git remote
-> and stay in-touch with upstream for reference or cherry-picking.
+## What's in here
 
-<details>
-  <summary>
-    <strong>Table of Contents</strong>
-    <small><i>(🔎 Click to expand/collapse)</i></small>
-  </summary>
+| Directory | What it configures | Deployed to |
+| --- | --- | --- |
+| [`alacritty/`](alacritty/) | Terminal — Catppuccin Mocha, Lilex Nerd Font Mono, live reload | `~/.config/alacritty` |
+| [`nvim/`](nvim/) | Editor — LunarVim-derived, lazy.nvim, LSP/formatting | `~/.config/nvim` |
+| `nvim/.ideavimrc` | IdeaVim keybindings | `~/.ideavimrc` |
+| [`fonts/`](fonts/) | Lilex and JetBrains Nerd Fonts | *copied* into `~/Library/Fonts` |
+| [`karabiner/`](karabiner/) | Left-Control toggles EN/中文 input source | *imported by hand* |
+| [`starship/`](starship/) | Prompt — initialised from `zsh/plugins.zsh` | `~/.config/starship.toml` |
+| [`tmux/`](tmux/) | Prefix `C-a`, status line | `~/.config/tmux` |
+| [`zed/`](zed/) | Editor — vim mode, Java runtime list | `~/.config/zed` |
+| [`zsh/`](zsh/) | Shell — oh-my-zsh, zoxide, starship, SDKMAN, NVM, uv | `~/.config/zsh` |
 
-<!-- vim-markdown-toc GFM -->
+## Deploying
 
-* [Features](#features)
-* [Prerequisites](#prerequisites)
-* [Install](#install)
-<!-- vim-markdown-toc -->
-</details>
+There is no installer — a fresh clone is not a working setup. The symlinks are made by
+hand. Most are directory-level:
 
-### Features
+```sh
+ln -s ~/path/to/dotfiles/alacritty  ~/.config/alacritty
+ln -s ~/path/to/dotfiles/nvim       ~/.config/nvim
+ln -s ~/path/to/dotfiles/tmux       ~/.config/tmux
+ln -s ~/path/to/dotfiles/zed        ~/.config/zed
+ln -s ~/path/to/dotfiles/zsh        ~/.config/zsh
+ln -s ~/path/to/dotfiles/starship/starship.toml ~/.config/starship.toml
+ln -s ~/path/to/dotfiles/nvim/.ideavimrc        ~/.ideavimrc
+```
 
-* Fast startup time — plugins are almost entirely lazy-loaded!
-* Robust, yet light-weight
-* Plugin management with [folke/lazy.nvim]. Use with `:Lazy` 
-* Install LSP, DAP, linters, and formatters. Use with `:Mason` 
-* LSP configuration with [nvim-lspconfig]
-* [telescope.nvim] centric work-flow with lists 
-* Unobtrusive, yet informative status & tab lines
-* Premium color-schemes
+Two components are not symlinked at all:
 
-### Prerequisites
+- **fonts** — copy the TTFs from `fonts/lilex/` into `~/Library/Fonts`.
+- **karabiner** — Karabiner-Elements owns `~/.config/karabiner/karabiner.json` and rewrites
+  it, so the repository tracks only `karabiner_modifications.json`. Import it through the
+  UI (Complex modifications → Add); editing the file alone changes nothing.
 
-* [git](https://git-scm.com/) ≥ 2.19.0 (`brew install git`)
-* [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim) ≥ v0.9.5
-  (`brew install neovim`)
+zsh needs one more piece, because its config dir is not read by default:
 
-**Optional**, but highly recommended:
+```sh
+echo 'export ZDOTDIR="$HOME/.config/zsh"' > ~/.zshenv
+```
 
-* [fzf](https://github.com/junegunn/fzf) (`brew install fzf`)
-* [ripgrep](https://github.com/BurntSushi/ripgrep) (`brew install ripgrep`)
-* [zoxide](https://github.com/ajeetdsouza/zoxide) (`brew install zoxide`)
+## Documentation
 
-### Install
+Longer write-ups live in [`docs/`](docs/), one directory per component:
 
-1. Let's clone this repo! Clone to `~/.config/nvim`
+- [`docs/nvim/lsp.md`](docs/nvim/lsp.md) — how language servers are chosen, enabled and
+  installed.
+- [`docs/nvim/input-source.md`](docs/nvim/input-source.md) — the per-buffer macOS input
+  source, and the `bin/xkbswitch` binary behind it.
 
-    ```bash
-    mkdir -p ~/.config
-    git clone git@github.com:jiangwenqiang/nvim-allinone.git ~/.config/nvim
-    cd ~/.config/nvim
-    ```
+Components without an entry are small enough to read directly. New docs go in
+`docs/<component>/`, and get added to this list.
 
-1. Run `nvim` (will install all plugins the first time).
-
-    It's highly recommended running `:checkhealth` to ensure your system is healthy
-    and meet the requirements.
-
-1. Inside Neovim, run `:LazyExtras` and use <kbd>x</kbd> to install extras.
-
-Enjoy! :smile:
+`AGENTS.md` covers the same repository for AI agents: the layout of the larger components,
+the conventions, and the traps that are expensive to rediscover — the things that are not
+obvious from reading a component's files. **The tables above are the canonical list** of what
+exists and where it deploys; `AGENTS.md` points here rather than repeating them. It is worth
+a read even if you are not an agent.
