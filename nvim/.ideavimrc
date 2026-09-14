@@ -10,7 +10,7 @@
 " Ultimate Edition: defaults write com.jetbrains.intellij ApplePressAndHoldEnabled -bool false
 
 " 尽量保留当前的 Vim 模式，而不是被 IDE 强制切换
-set idearefactormode=keep 
+set idearefactormode=keep
 
 " 中英文输入法自动切换
 set keep-english-in-normal
@@ -31,8 +31,8 @@ set surround
 " ReplaceWithRegister,ideavim自带的功能，不需要额外安装
 " https://github.com/JetBrains/ideavim/blob/master/doc/IdeaVim%20Plugins.md
 set ReplaceWithRegister
-nmap rs  <Plug>ReplaceWithRegisterOperator
-nmap rss <Plug>ReplaceWithRegisterLine
+nnoremap rs  <Plug>ReplaceWithRegisterOperator
+nnoremap rss <Plug>ReplaceWithRegisterLine
 xmap rs  <Plug>ReplaceWithRegisterVisual
 
 " 高亮搜索
@@ -71,8 +71,8 @@ xnoremap p pgvy
 inoremap jk <ESC>
 
 " 行首/行尾移动
-nmap gh g^
-nmap gl g$
+nnoremap gh g^
+nnoremap gl g$
 " 实现类或方法查找
 nmap gi <Action>(GotoImplementation)
 " 跳转到定义或引用处
@@ -90,7 +90,7 @@ nmap ge <action>(GotoNextError)
 " 跳转tab
 nmap H <Action>(PreviousTab)
 nmap L <Action>(NextTab)
-nmap J <ESC>:action EditorJoinLines<CR>
+nnoremap J <ESC>:action EditorJoinLines<CR>
 
 " Search for string in visible area and jump
 nmap s <Action>(flash.search)
@@ -124,7 +124,8 @@ nmap [f <Action>(MethodUp)
 nmap ]f <Action>(MethodDown)
 
 " 取消高亮
-nmap <ESC> :noh<CR>
+nnoremap <ESC> :noh<CR>
+
 " 类wildfire
 nmap <Enter> <Action>(EditorSelectWord)
 nmap <BS> <Action>(EditorUnSelectWord)
@@ -132,7 +133,7 @@ xmap <Enter> <Action>(EditorSelectWord)
 xmap <BS> <Action>(EditorUnSelectWord)
 
 " 快捷方式
-nmap <C-q> :q<CR>
+nnoremap <C-q> :q<CR>
 
 " 复制黏贴
 xmap <C-c> y
@@ -145,7 +146,7 @@ nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 
 " 取消高亮
-nmap <C-[> :noh<CR>
+nnoremap <C-[> :noh<CR>
 " 找到上一个或下一个突出高亮
 nmap <C-j> <Action>(GotoNextElementUnderCaretUsage)
 nmap <C-k> <Action>(GotoPrevElementUnderCaretUsage)
@@ -157,7 +158,7 @@ nmap <M-k> <Action>(MoveLineUp)
 " -----------------      Leader Keymaps      ----------------
 " -----------------------------------------------------------
 " 复制整个缓冲区
-nmap <leader>y mmggVGy`m
+nnoremap <leader>y mmggVGy`m
 " 全部查找
 nmap <leader>fa <Action>(SearchEverywhere)
 " 类查找
