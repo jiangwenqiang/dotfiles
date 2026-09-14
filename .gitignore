@@ -12,6 +12,7 @@ lazy-lock.json
 # zsh
 .zcompdump*
 .zsh_history
+.claude-code.zsh
 zsh/ai.zsh
 
 # zed files

@@ -84,7 +84,7 @@
     "commit": "f5eba19"
   },
   "nvim-tree.lua": {
-    "commit": "be5b788"
+    "commit": "882c54f"
   },
   "nvim-treesitter": {
     "commit": "4916d65"
@@ -93,7 +93,7 @@
     "commit": "cb06438"
   },
   "nvim-web-devicons": {
-    "commit": "e37bb1f"
+    "commit": "5f032a8"
   },
   "onedarker.nvim": {
     "commit": "b00dd21"

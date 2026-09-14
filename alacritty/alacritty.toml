@@ -52,7 +52,7 @@ multiplier = 5  # Default: 3
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~  FONT   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-[font] # /Users/aharo/Library/Fonts
+[font] # /Users/hermes/Library/Fonts
 normal = { family = "Lilex Nerd Font Mono", style = "Regular" }
 bold = { family = "Lilex Nerd Font Mono", style = "Bold" }
 italic  = { family = "Lilex Nerd Font Mono", style = "Italic" }

@@ -50,18 +50,18 @@
               "runtimes": [
                 {
                   "name": "JavaSE-1.8",
-                  "path": "/Users/hermes/.sdkman/candidates/java/8.0.462-tem/",
-                  "sources": "/Users/hermes/.sdkman/candidates/java/8.0.462-tem/src.zip"
+                  "path": "/Users/hermes/.sdkman/candidates/java/8.0.504+1-zulu/",
+                  "sources": "/Users/hermes/.sdkman/candidates/java/8.0.504+1-zulu/src.zip"
                 },
                 {
                   "name": "JavaSE-17",
-                  "path": "/Users/hermes/.sdkman/candidates/java/17.0.16-tem/",
-                  "sources": "/Users/hermes/.sdkman/candidates/java/17.0.16-tem/lib/src.zip"
+                  "path": "/Users/hermes/.sdkman/candidates/java/17.0.20+1.1-zulu/",
+                  "sources": "/Users/hermes/.sdkman/candidates/java/17.0.20+1.1-zulu/lib/src.zip"
                 },
                 {
                   "name": "JavaSE-21",
-                  "path": "/Users/hermes/.sdkman/candidates/java/21.0.10-tem/",
-                  "sources": "/Users/hermes/.sdkman/candidates/java/21.0.10-tem/lib/src.zip"
+                  "path": "/Users/hermes/.sdkman/candidates/java/21.0.12+1.1-tem/",
+                  "sources": "/Users/hermes/.sdkman/candidates/java/21.0.12+1.1-tem/lib/src.zip"
                 }
               ]
             },
@@ -92,7 +92,7 @@
       },
       "settings": {
         "java": {
-          "home": "/Users/hermes/.sdkman/candidates/java/21.0.8-tem/",
+          "home": "/Users/hermes/.sdkman/candidates/java/21.0.12+1.1-tem/",
           "errors": {
             "incompleteClasspath": {
               "severity": "warning"
