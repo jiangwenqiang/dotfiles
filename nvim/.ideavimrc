@@ -85,7 +85,7 @@ nmap gp <Action>(GotoSuperMethod)
 nmap gcc <Action>(CommentByLineComment)
 xmap gc <Action>(CommentByLineComment)<Esc>
 " 下个错误位置
-nmap ge <action>(GotoNextError)
+nnoremap ge <action>(GotoNextError)
 
 " 跳转tab
 nmap H <Action>(PreviousTab)
@@ -136,9 +136,9 @@ xmap <BS> <Action>(EditorUnSelectWord)
 nnoremap <C-q> :q<CR>
 
 " 复制黏贴
-xmap <C-c> y
+xnoremap <C-c> y
 map <C-S-V> p
-imap <C-S-V> <C-r>+
+inoremap <C-S-V> <C-r>+
 
 " https://github.com/JetBrains/ideavim
 " IdeaVim: track action Ids
