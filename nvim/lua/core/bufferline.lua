@@ -200,9 +200,13 @@ function M.buf_kill(kill_command, bufnr, force)
     if bo[bufnr].modified then
       choice = fn.confirm(fmt([[Save changes to "%s"?]], bufname), "&Yes\n&No\n&Cancel")
       if choice == 1 then
-        vim.api.nvim_buf_call(bufnr, function()
-          vim.cmd("w")
-        end)
+        if bufname == "" then
+          force = true
+        else
+          vim.api.nvim_buf_call(bufnr, function()
+            vim.cmd("w")
+          end)
+        end
       elseif choice == 2 then
         force = true
       else return
