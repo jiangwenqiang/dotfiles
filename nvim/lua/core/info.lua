@@ -12,6 +12,7 @@ local M = {
 local fmt = string.format
 local text = require("interface.text")
 local lsp_utils = require("lsp.utils")
+local lsp_filetypes = require("lsp.filetypes")
 
 local function str_list(list)
   return #list == 1 and list[1] or fmt("[%s]", table.concat(list, ", "))
@@ -80,7 +81,8 @@ local function make_client_info(client)
   local client_enabled_caps = lsp_utils.get_client_capabilities(client.id)
   local name = client.name
   local id = client.id
-  local filetypes = lsp_utils.get_supported_filetypes(name)
+  -- What the client is actually running with, i.e. after any trimming.
+  local filetypes = client.config.filetypes or {}
   local attached_buffers_list = str_list(vim.lsp.get_buffers_by_client_id(client.id))
   local client_info = {
     fmt("* name:                      %s", name),
@@ -101,26 +103,27 @@ local function make_client_info(client)
   return client_info
 end
 
+---The servers left in place for this filetype: what the servers declare, minus whatever
+---`lvim.lsp.filetypes` and the skipped_* lists trimmed away. See lsp/filetypes.lua.
 local function make_auto_lsp_info(ft)
-  local skipped_filetypes = lvim.lsp.automatic_configuration.skipped_filetypes
-  local skipped_servers = lvim.lsp.automatic_configuration.skipped_servers
   local info_lines = { "Automatic LSP info" }
+  local servers = lsp_filetypes.servers_for(ft)
 
-  if vim.tbl_contains(skipped_filetypes, ft) then
-    vim.list_extend(info_lines, { "* Status: disabled for " .. ft })
+  if #servers == 0 then
+    vim.list_extend(info_lines, { fmt("* Status: disabled for %s", ft) })
     return info_lines
   end
 
-  local supported = lsp_utils.get_supported_servers(ft)
-  local skipped = vim.tbl_filter(function(name)
-    return vim.tbl_contains(supported, name)
-  end, skipped_servers)
-
-  if #skipped == 0 then
-    return { "" }
+  local installed, missing = {}, {}
+  for _, name in ipairs(servers) do
+    table.insert(require("lsp.manager").is_installed(name) and installed or missing, name)
   end
 
-  vim.list_extend(info_lines, { fmt("* Skipped servers: %s", str_list(skipped)) })
+  vim.list_extend(info_lines, { fmt("* Enabled: %s", str_list(installed)) })
+  if #missing > 0 then
+    -- These are installed the first time a file of this filetype is opened.
+    vim.list_extend(info_lines, { fmt("* Awaiting install: %s", str_list(missing)) })
+  end
 
   return info_lines
 end

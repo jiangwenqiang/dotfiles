@@ -8,6 +8,7 @@ local skipped_servers = {
   "biome",
   "bzl",
   "ccls",
+  "codebook",
   "css_variables",
   "cssmodules_ls",
   "custom_elements_ls",
@@ -18,6 +19,7 @@ local skipped_servers = {
   "ember",
   "emmet_language_server",
   "emmet_ls",
+  "emmylua_ls",
   "eslint",
   "eslintls",
   "fennel_language_server",
@@ -41,6 +43,7 @@ local skipped_servers = {
   "nim_langserver",
   "ocamlls",
   "omnisharp",
+  "oxfmt",
   "phpactor",
   "psalm",
   "pylsp",
@@ -70,11 +73,13 @@ local skipped_servers = {
   "standardrb",
   "stimulus_ls",
   "stylelint_lsp",
+  "stylua",
   "svlangserver",
   "swift_mesonls",
   "templ",
   "tflint",
   "tinymist",
+  "tsgo",
   "unocss",
   "vale_ls",
   "vacuum",
@@ -89,7 +94,6 @@ local skipped_filetypes = { "markdown", "rst", "plaintext", "toml", "proto" }
 local join_paths = require("utils").join_paths
 
 return {
-  templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
   ---@deprecated use vim.diagnostic.config({ ... }) instead
   diagnostics = {},
   document_highlight = false,
@@ -102,6 +106,25 @@ return {
     ---@usage list of filetypes that the automatic installer will skip
     skipped_filetypes = skipped_filetypes,
   },
+  ---@usage Per-filetype trimming of what the servers themselves declare.
+  ---
+  ---A server declares which filetypes it handles; Neovim matches a buffer against that
+  ---list verbatim, and that list is what gets enabled and installed. This table is the
+  ---only place to subtract from it — there is no way to add.
+  ---
+  ---  filetypes = {
+  ---    html = { exclude = { "djlsp", "superhtml", "ltex_plus" } },
+  ---    markdown = false,
+  ---  }
+  ---
+  ---`exclude` drops those servers for that filetype only; `false` drops every server for
+  ---it. Either way a dropped server is neither started nor installed. A filetype with no
+  ---entry here keeps its servers' full declared list.
+  ---
+  ---See `lsp/filetypes.lua`: effective(s) = declared(s) − skipped_servers
+  ---                                                − skipped_filetypes
+  ---                                                − filetypes[ft].exclude
+  filetypes = {},
   buffer_mappings = {
     normal_mode = {
       ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover" },
@@ -133,13 +156,15 @@ return {
     --- use gq for formatting
     formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
   },
-  ---@usage list of settings of nvim-lsp-installer
+  ---@usage settings handed straight to `require("mason-lspconfig").setup()`
   installer = {
     setup = {
+      ---@usage nothing is installed ahead of time — a server is installed the first time a
+      ---file of one of its filetypes is opened. See lsp/manager.lua
       ensure_installed = {},
-      automatic_installation = {
-        exclude = {},
-      },
+      ---@usage mason-lspconfig would otherwise enable every installed server it knows about.
+      ---Enabling is driven by lsp/filetypes.lua instead, so it has to be off.
+      automatic_enable = false,
     },
   },
   nlsp_settings = {

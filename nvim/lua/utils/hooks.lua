@@ -24,7 +24,6 @@ function M.run_post_reload()
 end
 
 ---Reset any startup cache files used by lazy.nvim
----It also forces regenerating any template ftplugin files
 ---Tip: Useful for clearing any outdated settings
 function M.reset_cache()
   local lvim_modules = {}
@@ -35,7 +34,7 @@ function M.reset_cache()
     end
   end
   Log:trace(string.format("Cache invalidated for core modules: { %s }", table.concat(lvim_modules, ", ")))
-  require("lsp.templates").generate_templates()
+  require("lsp.filetypes").reset()
 end
 
 function M.run_post_update()

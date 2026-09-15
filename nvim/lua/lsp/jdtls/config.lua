@@ -15,6 +15,10 @@ M.ROOT_MARKERS_MULTI = { "mvnw", "gradlew", "settings.gradle", "settings.gradle.
 --- Markers for single-module projects
 M.ROOT_MARKERS_SINGLE = { "build.xml", "pom.xml", "build.gradle", "build.gradle.kts" }
 
+--- Markers that identify a Maven project specifically. ROOT_MARKERS_* also match Gradle,
+--- Ant and bare git repositories, for which `.mvn/maven.config` means nothing.
+M.MAVEN_MARKERS = { "pom.xml", "mvnw" }
+
 --- Check if a directory contains any of the given markers
 ---@param dirpath string Directory path to check
 ---@param markers string[] List of marker filenames
@@ -104,6 +108,17 @@ function M.get_config_area_name()
     }
 
     return config_map[os_name] and config_map[os_name][arch] or "config_mac"
+end
+
+--- Is this a Maven project at all?
+---@param dirpath string|nil Directory path to check
+---@return boolean is_maven
+function M.is_maven_project(dirpath)
+    if not dirpath then
+        return false
+    end
+
+    return has_any_marker(dirpath, M.MAVEN_MARKERS)
 end
 
 --- Extract Maven settings path from .mvn/maven.config

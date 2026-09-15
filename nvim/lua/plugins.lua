@@ -10,11 +10,9 @@ local core_plugins = {
         "williamboman/mason-lspconfig.nvim",
         cmd = { "LspInstall", "LspUninstall" },
         config = function()
+            -- `lvim.lsp.installer.setup` turns `automatic_enable` off: installing and
+            -- enabling are both driven by lsp/filetypes.lua and lsp/manager.lua.
             require("mason-lspconfig").setup(lvim.lsp.installer.setup)
-
-            -- automatic_installation is handled by lsp-manager
-            local settings = require("mason-lspconfig.settings")
-            settings.current.automatic_installation = false
         end,
         lazy = true,
         event = "User FileOpened",
