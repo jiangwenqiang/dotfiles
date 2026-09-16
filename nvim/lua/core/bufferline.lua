@@ -40,6 +40,25 @@ local function custom_filter(buf, buf_nums)
   return (tab_num == last_tab and is_log) or (tab_num ~= last_tab and not is_log)
 end
 
+---Show the tabline only while more than one buffer is listed.
+---
+---This replaces bufferline's `auto_toggle_bufferline`, which assigns
+---'showtabline' from inside the 'tabline' expression it is rendering. Neovim
+---takes the new value and recomputes the window layout but does not repaint, so
+---leftovers of the previous frame stay on screen: a ghost tabline row (where the
+---nvim-tree "Explorer" offset is drawn), and window bodies redrawn a row lower
+---with one row never repainted. Closing the last buffer showed it as nvim-tree
+---listing one file twice and dropping another -- the tree's own buffer was
+---correct throughout, only the pixels were stale, and `:redraw!` cleared them.
+---Setting the option from a scheduled callback, outside the redraw, does not
+---reproduce it.
+local function auto_toggle_tabline()
+  local want = #vim.fn.getbufinfo { buflisted = 1 } > 1 and 2 or 0
+  if vim.o.showtabline ~= want then
+    vim.o.showtabline = want
+  end
+end
+
 M.config = function()
   lvim.builtin.bufferline = {
     active = true,
@@ -61,7 +80,10 @@ M.config = function()
       get_element_icon = nil,
       show_duplicate_prefix = true,
       duplicates_across_groups = true,
-      auto_toggle_bufferline = true,
+      -- Deliberately off: bufferline's own toggle runs inside the 'tabline'
+      -- expression, which corrupts the screen. `auto_toggle_tabline` below does the
+      -- same job from a safe place. Do not turn this back on.
+      auto_toggle_bufferline = false,
       move_wraps_at_ends = false,
       groups = { items = {}, options = { toggle_hidden_on_enter = true } },
       mode = "buffers", -- set to "tabs" to only show tabpages instead
@@ -141,6 +163,9 @@ M.config = function()
       -- [focused and unfocused]. eg: { '|', '|' }
       separator_style = "thin",
       enforce_regular_tabs = false,
+      -- Hide the line when a single buffer is open. Inert while
+      -- `auto_toggle_bufferline` is off, but it states the intent that
+      -- `auto_toggle_tabline` implements.
       always_show_bufferline = false,
       hover = {
         enabled = false, -- requires nvim 0.8+
@@ -162,7 +187,14 @@ M.setup = function()
   end
 
   -- can't be set in settings.lua because default tabline would flash before bufferline is loaded
-  vim.opt.showtabline = 2
+  auto_toggle_tabline()
+
+  -- BufDelete is the one that matters: it is what takes the buffer count down
+  -- to one, and bufferline only ever listened for BufAdd and TabEnter.
+  vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete", "BufWinEnter", "TabEnter", "VimEnter" }, {
+    group = vim.api.nvim_create_augroup("_bufferline_tabline", { clear = true }),
+    callback = function() vim.schedule(auto_toggle_tabline) end,
+  })
 
   bufferline.setup {
     options = lvim.builtin.bufferline.options,
