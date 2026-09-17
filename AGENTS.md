@@ -53,6 +53,20 @@ The component list and each one's live path are in `README.md`. What matters whe
   effect until it is copied again.
 - **`zsh/` is reached through `ZDOTDIR`**, set in a real `~/.zshenv` — see the zsh section.
 
+### Two branches, and the files that differ between them
+
+`main` is one machine, `x86` is another. A few files are deliberately different on each —
+currently `zed/settings.json` (JDK paths), `zsh/dev.zsh` and `zsh/proxy.zsh`. That is a
+per-branch delta, not drift, so a merge conflict in one of them is expected and the answer
+is to **keep your own side**.
+
+The mechanism only holds if the marker sits on the value's own line. A comment *block* above
+the values does nothing, and does it silently: git conflicts only on lines both branches
+changed, so the block lands in the conflict while the values are still taken from the other
+side. A trailing comment on the value's line puts that line itself in the conflict. Do not
+reason about this — check it in a throwaway clone (`git clone . /tmp/x`, `git merge`, resolve,
+read the result back), because the failure looks identical to success.
+
 ### Runtime files land inside the repository
 
 Because `zsh/` is `~/.config/zsh` and Neovim's config dir is `nvim/`, programs write their
