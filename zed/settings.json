@@ -50,13 +50,13 @@
               "runtimes": [
                 {
                   "name": "JavaSE-1.8",
-                  "path": "/Users/hermes/.sdkman/candidates/java/8.0.504+1-zulu/",
-                  "sources": "/Users/hermes/.sdkman/candidates/java/8.0.504+1-zulu/src.zip"
+                  "path": "/Users/hermes/.sdkman/candidates/java/8.0.502-zulu/", // this machine's JDK; the x86 branch lists its own
+                  "sources": "/Users/hermes/.sdkman/candidates/java/8.0.502-zulu/src.zip" // this machine's JDK; the x86 branch lists its own
                 },
                 {
                   "name": "JavaSE-17",
-                  "path": "/Users/hermes/.sdkman/candidates/java/17.0.20+1.1-zulu/",
-                  "sources": "/Users/hermes/.sdkman/candidates/java/17.0.20+1.1-zulu/lib/src.zip"
+                  "path": "/Users/hermes/.sdkman/candidates/java/17.0.20-tem/", // this machine's JDK; the x86 branch lists its own
+                  "sources": "/Users/hermes/.sdkman/candidates/java/17.0.20-tem/lib/src.zip" // this machine's JDK; the x86 branch lists its own
                 },
                 {
                   "name": "JavaSE-21",
