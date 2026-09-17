@@ -79,7 +79,7 @@
       "space b w": "pane::CloseOtherItems",
       "space c a": "editor::ToggleCodeActions",
       "space l f": "editor::Format",
-      "space c r ": "editor::Rename",
+      "space c r": "editor::Rename",
       "space e": "pane::RevealInProjectPanel",
       "space g b": "git::Blame",
       "space g B": "editor::OpenPermalinkToLine",
