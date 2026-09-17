@@ -8,7 +8,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~  GENERAL   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 [general]
 import = [
-  "~/.config/alacritty/themes/catppuccin/themescatppuccin-mocha.toml",
+  "~/.config/alacritty/themes/catppuccin/catppuccin-mocha.toml",
   # "~/.config/alacritty/themes/catppuccin/catppuccin-macchiato.toml",
   # "~/.config/alacritty/themes/catppuccin/catppuccin-frappe.toml",
   # "~/.config/alacritty/themes/catppuccin/catppuccin-latte.toml",
@@ -33,7 +33,7 @@ position = "None"  # None | { x = <integer>, y = <integer> }
 padding = { x = 5, y = 5 }  
 dynamic_padding = false  # true | false
 decorations = "Buttonless"  # Full | None | Transparent | Buttonless 
-opacity = 0.85
+opacity = 1.0
 startup_mode = "Windowed"  # Windowed | Maximized | Fullscreen | SimpleFullscreen
 title = "Alacritty"  # Default: "Alacritty"
 dynamic_title = true  # true | false
@@ -79,7 +79,7 @@ command = "None"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~  SELECTION    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 [selection]
-semantic_escape_chars = ",│`|:\"' ()[]{}<>\\t"  
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"  # the trailing \t is a literal tab: "\\t" would be a backslash and a 't', which would make both of those word separators instead
 save_to_clipboard = false  # true | false
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     ...........       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
