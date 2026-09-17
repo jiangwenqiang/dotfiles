@@ -244,39 +244,39 @@ M.config = function()
         },
         d = { "<cmd>NeovimDocs<cr>", "View Neovim's docs" },
         f = {
-          "<cmd>lua require('lvim.core.telescope.custom-finders').find_lunarvim_files()<cr>",
+          "<cmd>lua require('core.telescope.custom-finders').find_lunarvim_files()<cr>",
           "Find Neovimfiles",
         },
         g = {
-          "<cmd>lua require('lvim.core.telescope.custom-finders').grep_lunarvim_files()<cr>",
+          "<cmd>lua require('core.telescope.custom-finders').grep_lunarvim_files()<cr>",
           "Grep Neovimfiles",
         },
         k = { "<cmd>Telescope keymaps<cr>", "View Neovim's keymappings" },
         i = {
-          "<cmd>lua require('lvim.core.info').toggle_popup(vim.bo.filetype)<cr>",
+          "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
           "Toggle NeovimInfo",
         },
         I = {
-          "<cmd>lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
+          "<cmd>lua require('core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
           "View Neovim's changelog",
         },
         l = {
           name = "+logs",
           d = {
-            "<cmd>lua require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())<cr>",
+            "<cmd>lua require('core.terminal').toggle_log_view(require('core.log').get_path())<cr>",
             "view default log",
           },
           D = {
-            "<cmd>lua vim.fn.execute('edit ' .. require('lvim.core.log').get_path())<cr>",
+            "<cmd>lua vim.fn.execute('edit ' .. require('core.log').get_path())<cr>",
             "Open the default logfile",
           },
           l = {
-            "<cmd>lua require('lvim.core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>",
+            "<cmd>lua require('core.terminal').toggle_log_view(vim.lsp.get_log_path())<cr>",
             "view lsp log",
           },
           L = { "<cmd>lua vim.fn.execute('edit ' .. vim.lsp.get_log_path())<cr>", "Open the LSP logfile" },
           n = {
-            "<cmd>lua require('lvim.core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
+            "<cmd>lua require('core.terminal').toggle_log_view(os.getenv('NVIM_LOG_FILE'))<cr>",
             "view neovim log",
           },
           N = { "<cmd>edit $NVIM_LOG_FILE<cr>", "Open the Neovim logfile" },
