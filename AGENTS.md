@@ -164,7 +164,7 @@ the symptom to look for — not a crash.
 
 `#(...)` in a format is an **asynchronous job**: the first expansion renders it as empty and
 the line is redrawn when the command returns. The status bar hides this; nothing else does.
-`tmux display-message -p '#{T:status-right}'` prints that empty first pass and keeps printing
+`tmux display-message -p '#{T:status-left}'` prints that empty first pass and keeps printing
 it no matter how many times it is called, because that path never fills the job cache — so a
 status-line block cannot be verified through `display-message`, and a blank reading there is
 evidence of nothing. Two readings that are real: watch the attached client redraw, or have
