@@ -69,8 +69,15 @@ a component's files.
 
 - `live_config_reload = true`, so a malformed TOML surfaces in the running window and the
   previous config stays in effect. A reload is not a safe way to test a change.
-- `themes/gruvbox-material-alacritty.yml` predates the TOML switch and is imported by
-  nothing — the `themes/` directory is not all live.
+- **The theme is deliberately off.** Every entry in `[general].import` is commented out, so
+  the terminal runs on Alacritty's built-in palette. That is the intended look, not a bug to
+  fix. The paths in that list are correct, and `themes/catppuccin/*.toml` are what to
+  uncomment to turn one on. An earlier revision had `themes` pasted into the filename, so the
+  import failed *silently* — logged at INFO, not ERROR — and produced the very same default
+  colours. That is why nothing looked wrong for as long as it did.
+- A failed import is quiet by design; `print_events` is not. Turning it on to debug a
+  keybinding writes every input event to `$TMPDIR/Alacritty-<pid>.log`, which reached 144 MiB
+  before anyone noticed the file existed.
 
 ### fonts
 

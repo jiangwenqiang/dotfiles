@@ -7,8 +7,12 @@
 # ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝   ╚═╝      ╚═╝      ╚═╝
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~  GENERAL   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 [general]
+# No theme: with every line below commented out the terminal runs on Alacritty's
+# built-in palette, which is the intended look. The paths are correct as written --
+# an earlier version had "themes" pasted into the filename, so the import failed
+# silently and it *looked* like the default. Uncomment one line to turn a theme on.
 import = [
-  "~/.config/alacritty/themes/catppuccin/catppuccin-mocha.toml",
+  # "~/.config/alacritty/themes/catppuccin/catppuccin-mocha.toml",
   # "~/.config/alacritty/themes/catppuccin/catppuccin-macchiato.toml",
   # "~/.config/alacritty/themes/catppuccin/catppuccin-frappe.toml",
   # "~/.config/alacritty/themes/catppuccin/catppuccin-latte.toml",
@@ -167,7 +171,7 @@ bindings = [
 render_timer= false # true | false
 persistent_logging= true # true | false
 log_level = "Warn" # "Off" | "Error" | "Warn" | "Info" | "Debug" | "Trace"
-print_events= true # true | false
+print_events= false # true | false — on, this logs every input event; it grew to 144 MiB
 highlight_damage= false # IMPORTANT OR ELSE ITS WEIRD 
 prefer_egl= false # true | false
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     ...........       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
