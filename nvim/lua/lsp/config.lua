@@ -68,6 +68,7 @@ local skipped_servers = {
   "somesass_ls",
   "sourcery",
   "spectral",
+  "bqls",
   "sqlls",
   "sqls",
   "standardrb",
