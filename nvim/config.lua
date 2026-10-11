@@ -2,6 +2,8 @@
 vim.o.relativenumber = true
 vim.opt.mouse = ""
 vim.opt.winborder = "single"
+-- vim.opt.cursorcolumn = true
+
 
 -- Fix ESC+j\k swap lines
 -- lvim.keys.insert_mode["<A-j>"] = false
