@@ -93,7 +93,7 @@
       },
       "settings": {
         "java": {
-          "home": "/Users/hermes/.sdkman/candidates/java/21.0.12+1.1-tem/",
+          "home": "/Users/hermes/.sdkman/candidates/java/25.0.4-tem/",
           "errors": {
             "incompleteClasspath": {
               "severity": "warning"
