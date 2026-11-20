@@ -20,3 +20,15 @@ if command -v uv &> /dev/null; then
     LATEST_DIR=$(ls "$HOME/.local/share/uv/python" 2>/dev/null | grep "^cpython-[0-9]" | sort -V | tail -1)
     [ -n "$LATEST_DIR" ] && export PATH="$HOME/.local/share/uv/python/$LATEST_DIR/bin:$PATH"
 fi
+
+# Homebrew 安装的 rustup
+if command -v brew >/dev/null 2>&1; then
+    if brew list rustup &>/dev/null; then
+        export PATH="$(brew --prefix rustup)/bin:$PATH"
+    fi
+fi
+
+# Rust 工具链
+if [[ -d "$HOME/.cargo/bin" ]]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
