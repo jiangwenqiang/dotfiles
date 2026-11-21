@@ -19,6 +19,7 @@ It is single-machine and deliberately not portable. `/Users/hermes` is hardcoded
 | [`karabiner/`](karabiner/) | Left-Control toggles EN/中文 input source | *imported by hand* |
 | [`starship/`](starship/) | Prompt — initialised from `zsh/plugins.zsh` | `~/.config/starship.toml` |
 | [`tmux/`](tmux/) | Prefix `C-a`, status line | `~/.config/tmux` |
+| [`herdr/`](herdr/) | Terminal workspace manager for AI coding agents — prefix `C-a` | `~/.config/herdr/config.toml` |
 | [`zed/`](zed/) | Editor — vim mode, Java runtime list | `~/.config/zed` |
 | [`zsh/`](zsh/) | Shell — oh-my-zsh, zoxide, starship, SDKMAN, NVM, uv | `~/.config/zsh` |
 
@@ -35,7 +36,13 @@ ln -s ~/path/to/dotfiles/zed        ~/.config/zed
 ln -s ~/path/to/dotfiles/zsh        ~/.config/zsh
 ln -s ~/path/to/dotfiles/starship/starship.toml ~/.config/starship.toml
 ln -s ~/path/to/dotfiles/nvim/.ideavimrc        ~/.ideavimrc
+ln -s ~/path/to/dotfiles/herdr/config.toml      ~/.config/herdr/config.toml
 ```
+
+herdr is linked at the file, not the directory: `~/.config/herdr` also holds the running
+server's own state (`herdr.sock`, logs, `session-snapshots/`), and a directory symlink would
+make herdr write all of that into this repository. Keybinding changes apply to a running
+server with `herdr server reload-config`; `herdr config check` validates the file.
 
 Two components are not symlinked at all:
 
