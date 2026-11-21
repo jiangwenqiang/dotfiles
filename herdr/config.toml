@@ -1,0 +1,87 @@
+# herdr — terminal workspace manager for AI coding agents.
+# Live path: ~/.config/herdr/config.toml. Anything omitted keeps its default;
+# `herdr --default-config` prints every option with the default values.
+
+# First-run notification setup is already done on this machine. Leaving this
+# key out re-shows onboarding, so it stays explicit.
+onboarding = false
+
+[theme]
+# Match tmux/tmux.conf: Solarized Dark, base03/02 background with yellow text.
+name = "solarized"
+
+[ui]
+# tmux has no sidebar, so collapse it to zero width here rather than leaving
+# the compact rail. `prefix+shift+b` still brings it back when agent status is
+# what you want to see.
+sidebar_start_collapsed = true
+sidebar_collapsed_mode = "hidden"
+
+# Tabs live at the bottom. The mode bars (prefix/navigate/copy/resize) replace
+# the bottom row while a mode is active, so the tab row is hidden during a mode
+# and comes back when it ends — the same tradeoff tmux makes with its status line.
+tab_bar_position = "bottom"
+
+# The focused pane's directory at the right edge of the tab row. Herdr has no
+# built-in cwd token there, so this is a `command` entry: it runs on the server,
+# from the focused pane's directory, with HERDR_ACTIVE_PANE_CWD set. It prints
+# the last two path components (~ for $HOME). Entries re-run on their own timer,
+# not when the tab changes, so 1s — the shortest interval allowed — is what keeps
+# the path from trailing the active tab by more than a moment.
+tab_bar_right = [
+  { type = "command", command = 'd=${HERDR_ACTIVE_PANE_CWD:-$PWD}; case $d in "$HOME") d="~";; "$HOME"/*) d="~${d#"$HOME"}";; esac; case $d in */*/*) rest=${d%/*}; printf "%s/%s" "${rest##*/}" "${d##*/}";; *) printf "%s" "$d";; esac', interval_seconds = 1 },
+]
+
+# tmux-style chrome: shared divider lines between panes, no outside frame, no
+# gaps, no per-pane scrollbar column.
+pane_borders = "auto"
+pane_outer_borders = false
+pane_gaps = false
+pane_scrollbars = false
+
+# Agent notifications are in-app toasts in the top-right corner rather than a
+# status segment in the tab row. The default 1s delay is kept: Herdr only shows
+# the toast if the pane is still finished or waiting for input when it expires,
+# and it skips the toast when the tab is already focused.
+[ui.toast]
+delivery = "herdr"
+
+[ui.toast.herdr]
+position = "top-right"
+
+[keys]
+# Prefix that enters prefix mode. herdr ships with ctrl+b; this machine uses
+# ctrl+a to match tmux.
+prefix = "ctrl+a"
+
+# prefix+b splits horizontally in tmux, so the sidebar toggle moves off that
+# key, and reload matches tmux's prefix+r.
+toggle_sidebar = "prefix+shift+b"
+split_horizontal = "prefix+b"
+reload_config = "prefix+r"
+
+# prefix+w opens the workspace picker, which is herdr's navigate mode.
+# Selection defaults to the arrow keys; j/k are added so it behaves like
+# tmux's choose-tree with `mode-keys vi`. Workspace selection is checked
+# before pane movement, so j/k shadow navigate_pane_down/up inside the
+# picker — h/l still move between panes, and prefix+h/j/k/l still work
+# outside it.
+navigate_workspace_up = ["up", "k"]
+navigate_workspace_down = ["down", "j"]
+
+# tmux's prefix+t popup shell.
+[[keys.command]]
+key = "prefix+t"
+type = "popup"
+command = "$SHELL"
+width = "80%"
+height = "80%"
+
+# herdr-bar's Slack-style switcher: fuzzy jump to agents, tabs and workspaces.
+# The plugin installs no keybinding itself; install it first with
+# `herdr plugin install jeffarese/herdr-bar`.
+[[keys.command]]
+key = "prefix+k"
+type = "plugin_action"
+command = "herdr-bar.open"
+description = "command bar"
