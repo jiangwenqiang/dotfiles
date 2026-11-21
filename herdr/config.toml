@@ -17,6 +17,11 @@ name = "solarized"
 sidebar_start_collapsed = true
 sidebar_collapsed_mode = "hidden"
 
+# New tabs get a generated name on the keypress, the way tmux opens a window.
+# The name prompt is Herdr's default and would otherwise sit between prefix+c
+# and the new shell.
+prompt_new_tab_name = false
+
 # Tabs live at the bottom. The mode bars (prefix/navigate/copy/resize) replace
 # the bottom row while a mode is active, so the tab row is hidden during a mode
 # and comes back when it ends — the same tradeoff tmux makes with its status line.
