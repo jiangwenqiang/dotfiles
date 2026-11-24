@@ -10,6 +10,15 @@ onboarding = false
 # Match tmux/tmux.conf: Solarized Dark, base03/02 background with yellow text.
 name = "solarized"
 
+# The mode bar (prefix/navigate/copy/resize) paints its background from
+# panel_bg. "transparent" is Color::Reset, so the bar uses the outer
+# terminal's default background instead of solarized base03. This applies to
+# every panel_bg surface: the tab bar and overlays/modals change with it.
+# Not alpha: parse_color has no alpha channel, and 8-digit hex (#rrggbbaa)
+# is not parsed — it falls through to the unknown-colour fallback (cyan).
+[theme.custom]
+panel_bg = "transparent"
+
 [ui]
 # tmux has no sidebar, so collapse it to zero width here rather than leaving
 # the compact rail. `prefix+shift+b` still brings it back when agent status is
