@@ -99,3 +99,12 @@ key = "prefix+k"
 type = "plugin_action"
 command = "herdr-bar.open"
 description = "command bar"
+
+[experimental]
+# Prefix keys are bare letters (prefix+b, c, k, t, w, r), and a Chinese IME
+# active in the terminal eats them as pinyin before herdr sees the keypress.
+# Herdr then switches the host input source to the ASCII layout while prefix
+# mode is active and restores the previous source on exit. Best-effort and
+# macOS-only; it applies to prefix mode only, and it is not what fixes the IME
+# candidate window in Claude Code — that is reveal_hidden_cursor_for_cjk_ime.
+switch_ascii_input_source_in_prefix = true
